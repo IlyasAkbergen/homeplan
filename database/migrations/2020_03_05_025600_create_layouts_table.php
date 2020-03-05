@@ -15,7 +15,8 @@ class CreateLayoutsTable extends Migration
     {
         Schema::create('layouts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('space');
+            $table->unsignedDouble('space');
+            $table->integer("rooms_count");
             $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
