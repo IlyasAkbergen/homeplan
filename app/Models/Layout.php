@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Layout extends Model
 {
+    protected $fillable = ['space', 'rooms_count'];
     public function rooms()
     {
         return $this->belongsToMany(Room::class);
