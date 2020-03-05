@@ -18,6 +18,7 @@ class CreateApartmentComplexesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('address')->nullable();
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }
