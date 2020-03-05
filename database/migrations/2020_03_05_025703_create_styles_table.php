@@ -15,8 +15,10 @@ class CreateStylesTable extends Migration
     {
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('parent_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }
