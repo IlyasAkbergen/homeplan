@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ApartmentComplexResource extends JsonResource
+class StyleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,8 @@ class ApartmentComplexResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'address' => $this->address,
-            'layouts' => $this->when($this->relationLoaded('layouts'),
-                LayoutResource::collection($this->layouts)
+            'children' => $this->when($this->relationLoaded('children'),
+                StyleResource::collection($this->children)
             ),
         ];
     }

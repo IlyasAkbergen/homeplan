@@ -17,11 +17,14 @@ class ApartmentComplexController extends Controller
     }
 
     public function getAll() {
-        return response()->json([
-            'complexes' => ApartmentComplexResource::collection(
-                ApartmentComplex::with(['layouts'])->get()
-            )
-        ]);
+        $complexes = ApartmentComplex::with([
+            'layouts',
+            'layouts.rooms',
+            'layouts.rooms.images',
+        ])->get();
 
+        return $this->responseSuccess([
+            'complexes' => ApartmentComplexResource::collection($complexes)
+        ]);
     }
 }

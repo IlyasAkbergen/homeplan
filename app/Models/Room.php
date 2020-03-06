@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    protected $with = ['type', 'style'];
     public function type()
     {
         return $this->belongsTo(
@@ -14,9 +15,9 @@ class Room extends Model
             'id');
     }
 
-    public function styles()
+    public function style()
     {
-        return $this->belongsToMany(Style::class);
+        return $this->belongsTo(Style::class);
     }
 
     public function layouts()

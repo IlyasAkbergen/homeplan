@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LayoutResource extends JsonResource
+class RoomResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +17,13 @@ class LayoutResource extends JsonResource
         return [
             'id' => $this->id,
             'space' => $this->space,
-            'rooms_count' => $this->rooms_count,
-            'rooms' => $this->when($this->relationLoaded('rooms'),
-                RoomResource::collection($this->rooms)
-            ),
+            'price' => $this->price,
+            'type' => $this->when($this->relationLoaded('type'),
+                new RoomTypeResource($this->type)),
+            'style' => $this->when($this->relationLoaded('style'),
+                new StyleResource($this->style)),
             'images' => $this->when($this->relationLoaded('images'),
-                ImageResource::collection($this->images)
-            )
+                ImageResource::collection($this->images)),
         ];
     }
 }
