@@ -2,7 +2,7 @@
     <section class="title">
         <div class="container-fluid">
             <div class="title__inner">
-                <h1 class="title__step">ШАГ {{ step }}/6</h1>
+                <h1 class="title__step">ШАГ {{ step }}/3</h1>
                 <h1 class="title__name">
                     <slot></slot>
                 </h1>

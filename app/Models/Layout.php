@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Layout extends Model
 {
     protected $fillable = ['space', 'rooms_count'];
-    protected $with = ['rooms', 'images'];
-    public function rooms()
+    protected $with = ['roomTypes', 'images'];
+    public function roomTypes()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsToMany(RoomType::class);
     }
 
     public function images()

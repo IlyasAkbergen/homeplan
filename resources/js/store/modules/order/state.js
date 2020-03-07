@@ -1,4 +1,6 @@
 export default {
     selectedComplexId: null,
-    roomsCount: 1,
+    selectedRoomsCount: 1,
+    selectedLayoutId: null,
+    selectedRooms: [],
 }

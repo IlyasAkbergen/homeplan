@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLayoutRoomTable extends Migration
+class CreateLayoutRoomTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateLayoutRoomTable extends Migration
      */
     public function up()
     {
-        Schema::create('layout_room', function (Blueprint $table) {
+        Schema::create('layout_room_type', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('layout_id');
-            $table->unsignedInteger('room_id');
+            $table->unsignedInteger('room_type_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateLayoutRoomTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('layout_room');
+        Schema::dropIfExists('layout_room_type');
     }
 }

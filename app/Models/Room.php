@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $with = ['type', 'style'];
+    protected $with = ['style'];
     public function type()
     {
         return $this->belongsTo(

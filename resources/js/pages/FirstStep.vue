@@ -9,9 +9,9 @@
                 <div class="main__inner">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8 col-md-10">
-                            <select class="main__select" >
-                                <option selected>выбрать ЖК</option>
-                                <option v-for="">выбрать ЖК</option>
+                            <select class="main__select" v-model="complex">
+                                <option :value="null">выбрать ЖК</option>
+                                <option v-for="complex in allComplexes" :value="complex.id">{{ complex.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -20,17 +20,19 @@
                             <h1 class="main__rooms">Количество комнат</h1>
                         </div>
                         <div class="col-xl-4 col-lg-5 col-md-6 main__content--buttons">
-                            <button class="main__content--button active">1</button>
-                            <button class="main__content--button">2</button>
-                            <button class="main__content--button">3</button>
-                            <button class="main__content--button">4</button>
-                            <button class="main__content--button">5+</button>
+                            <button :class="getClassOfRoomCount(1)" @click="setRoomsCount(1)">1</button>
+                            <button :class="getClassOfRoomCount(2)" @click="setRoomsCount(2)">2</button>
+                            <button :class="getClassOfRoomCount(3)" @click="setRoomsCount(3)">3</button>
+                            <button :class="getClassOfRoomCount(4)" @click="setRoomsCount(4)">4</button>
+                            <button :class="getClassOfRoomCount(5)" @click="setRoomsCount(5)">5+</button>
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col main__save--button" @click="this.incrementStep">
-                            <router-link to="/layouts">далее</router-link>
-                        </div>
+                        <NextButton
+                            nextPath="/layouts"
+                            centered
+                            :disabled="!allowNext"
+                        />
                     </div>
                 </div>
             </div>
@@ -39,20 +41,36 @@
 </template>
 
 <script>
-    import Header from '../components/Header';
-    import StepInfo from '../components/StepInfo';
-    import NextButton from '../components/NextButton';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState, mapMutations } from 'vuex';
 
     export default {
         name: "FirstStep",
         components: {
-            NextButton,
-            Header,
-            StepInfo,
+            StepInfo: () => import('../components/StepInfo'),
+            Header: () => import('../components/Header'),
+            NextButton: () => import('../components/NextButton'),
         },
         methods: {
             ...mapActions('stage', ['incrementStep']),
+            ...mapMutations('order', ['setRoomsCount', 'setSelectedComplex']),
+            getClassOfRoomCount(count){
+                return `main__content--button ${count === this.selectedRoomsCount ? 'active' : ''}`;
+            },
+        },
+        computed: {
+            ...mapState(['allComplexes']),
+            ...mapState('order', ['selectedComplexId', 'selectedRoomsCount']),
+            complex: {
+                get () {
+                    return this.selectedComplexId;
+                },
+                set (value) {
+                    this.setSelectedComplex(value)
+                }
+            },
+            allowNext() {
+                return this.selectedComplexId !== null && this.selectedRoomsCount > 0;
+            },
         }
     }
 </script>
