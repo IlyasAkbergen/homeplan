@@ -2,7 +2,7 @@
     <div>
         <Header />
         <StepInfo step="3">
-            Какой <span>{{ selectedRoomType ? selectedRoomType.name : '' }}</span> вам нужен?
+            Выберите стиль для комнаты: <span>{{ selectedRoomType ? selectedRoomType.name : '' }}</span>
         </StepInfo>
         <section class="rooms">
             <div class="container-fluid">
@@ -30,12 +30,13 @@
                     <h1>Выберите понравившийся интерьер</h1>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="col-xl-4 col-md-6 col-sm-12"
+                         v-for="room in rooms"
+                         @click="pushSelectedRoom(room.id)"
+                         :key="room.id"
+                    >
                         <div
                             :class="`card rooms--card ${ selectedRooms.includes(room.id) ? 'active' : '' }`"
-                            v-for="room in rooms"
-                            @click="pushSelectedRoom(room.id)"
-                            :key="room.id"
                         >
                             <div class="rooms__card-image">
                                 <img :src="room.images[0].path" class="card-img-top">
