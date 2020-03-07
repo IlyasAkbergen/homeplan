@@ -17,6 +17,8 @@ class RoomTypeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'rooms' => $this->when($this->relationLoaded('rooms'),
+                RoomResource::collection($this->rooms)),
         ];
     }
 }

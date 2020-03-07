@@ -19,12 +19,11 @@ class ApartmentComplexController extends Controller
     public function getAll() {
         $complexes = ApartmentComplex::with([
             'layouts',
-            'layouts.rooms',
-            'layouts.rooms.images',
+            'layouts.roomTypes',
+            'layouts.roomTypes.rooms',
+            'layouts.roomTypes.rooms.images',
         ])->get();
 
-        return $this->responseSuccess([
-            'complexes' => ApartmentComplexResource::collection($complexes)
-        ]);
+        return $this->responseSuccess(ApartmentComplexResource::collection($complexes));
     }
 }

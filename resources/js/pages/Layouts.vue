@@ -8,10 +8,15 @@
                     <BackButton prevPath="/" />
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="card layout__card layout__active">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" v-for="layout in layouts">
+                                <div
+                                    :class="`card layout__card ${
+                                        layout.id === selectedLayoutId ? 'layout__active' : ''
+                                    }`"
+                                    @click="setSelectedLayoutId(layout.id)"
+                                >
                                     <div class="layout__card-image">
-                                        <img src="" class="card-img-top" alt="...">
+                                        <img :src="layout.images[0].path" class="card-img-top" alt="...">
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">42 м2</p>
@@ -20,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <NextButton nextPath="/rooms" />
+                    <NextButton nextPath="/rooms" :disabled="selectedLayoutId === null"/>
                 </div>
             </div>
         </section>
@@ -28,16 +33,29 @@
 </template>
 
 <script>
-    import StepInfo from "../components/StepInfo";
-    import BackButton from "../components/BackButton";
-    import NextButton from "../components/NextButton";
-
+    import {mapGetters, mapMutations, mapState} from 'vuex';
     export default {
         name: "Layouts",
         components: {
-            StepInfo,
-            BackButton,
-            NextButton,
+            StepInfo: () => import('../components/StepInfo'),
+            BackButton: () => import('../components/BackButton'),
+            NextButton: () => import('../components/NextButton'),
+            Header: () => import('../components/Header')
+        },
+        computed: {
+            ...mapGetters({
+                layouts: 'getFilteredLayouts'
+            }),
+            ...mapState('order', ['selectedLayoutId']),
+            ...mapState(['allComplexes'])
+        },
+        created() {
+            if (!this.layouts.some((l) => l.id === this.selectedLayoutId)) {
+                this.setSelectedLayoutId(null)
+            }
+        },
+        methods: {
+            ...mapMutations('order', ['setSelectedLayoutId']),
         }
     }
 </script>

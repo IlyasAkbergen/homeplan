@@ -9,21 +9,21 @@ class LayoutResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $requests
      * @return array
      */
     public function toArray($request)
     {
+        $roomTypes = $this->relationLoaded('roomTypes') ? RoomTypeResource::collection($this->roomTypes) : [];
+
         return [
             'id' => $this->id,
             'space' => $this->space,
             'rooms_count' => $this->rooms_count,
-            'rooms' => $this->when($this->relationLoaded('rooms'),
-                RoomResource::collection($this->rooms)
-            ),
+            'roomTypes' => $roomTypes,
             'images' => $this->when($this->relationLoaded('images'),
                 ImageResource::collection($this->images)
-            )
+            ),
         ];
     }
 }

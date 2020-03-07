@@ -1,9 +1,15 @@
 <template>
-<!--    <div class="col main__save&#45;&#45;button" @click="this.incrementStep">-->
-<!--        <router-link :to="nextPath">далее</router-link>-->
-<!--    </div>-->
-    <div class="col-md-2 col-sm-12 nav__next--button">
-        <router-link :to="nextPath" class="next--button">далее</router-link>
+    <div :class="centered
+        ? 'col main__save--button'
+        : 'col-md-2 col-sm-12 nav__next--button'"
+    >
+        <router-link
+            :to="nextPath"
+            :class="`next--button ${disabled ? 'disabled' : ''}`"
+            :event="!disabled ? 'click' : ''"
+        >
+            далее
+        </router-link>
     </div>
 </template>
 
@@ -13,6 +19,14 @@
         name: "NextButton",
         props: {
             nextPath: String,
+            disabled: {
+                type: Boolean,
+                default: false
+            },
+            centered: {
+                type: Boolean,
+                default: false,
+            }
         },
         methods: {
             ...mapActions('stage', ['incrementStep']),
