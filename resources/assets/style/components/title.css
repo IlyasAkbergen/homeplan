@@ -1,0 +1,19 @@
+.title{
+    text-align:center;
+    padding-top: 30px;
+}
+.title__step{
+    font-family: 'Formular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+}
+.title__name{
+    font-family: 'Formular-medium';
+    padding-top: 20px;
+}
+.title__name span{
+    color: #FF5722;
+}
