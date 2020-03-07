@@ -11,9 +11,7 @@
                         <div class="col-xl-6 col-lg-8 col-md-10">
                             <select class="main__select" >
                                 <option selected>выбрать ЖК</option>
-                                <option>выбрать ЖК</option>
-                                <option>выбрать ЖК</option>
-                                <option>выбрать ЖК</option>
+                                <option v-for="">выбрать ЖК</option>
                             </select>
                         </div>
                     </div>
