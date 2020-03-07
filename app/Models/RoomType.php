@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomType extends Model
 {
+
+    public function layouts(){
+        return $this->belongsToMany(Layout::class)->withPivot('id');
+    }
     public function rooms()
     {
         return $this->hasMany(Room::class);

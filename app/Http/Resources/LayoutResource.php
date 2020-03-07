@@ -21,6 +21,9 @@ class LayoutResource extends JsonResource
             'space' => $this->space,
             'rooms_count' => $this->rooms_count,
             'roomTypes' => $roomTypes,
+            'pivot_id'=>$this->whenPivotLoaded('apartment_complex_layout', function () {
+                return $this->pivot->id;
+            }),
             'images' => $this->when($this->relationLoaded('images'),
                 ImageResource::collection($this->images)
             ),
