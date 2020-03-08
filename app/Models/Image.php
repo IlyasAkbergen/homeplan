@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    protected $fillable = ['model_id', 'model_type', 'path', 'name'];
+
     /**
      * @return string
      */

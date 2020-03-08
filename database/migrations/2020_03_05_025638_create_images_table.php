@@ -21,7 +21,7 @@ class CreateImagesTable extends Migration
             $table->string('uuid')->nullable();
             $table->unsignedInteger('model_id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('position');
+            $table->unsignedInteger('position')->nullable();
             $table->timestamps();
         });
     }

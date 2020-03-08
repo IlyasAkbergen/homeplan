@@ -1,0 +1,92 @@
+.nav__prev--button{
+    display: flex;
+}
+.nav__next--button{
+    display: flex;
+    justify-content: flex-end;
+}
+.prev--button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 50px;
+    background-color: #F2F2F2;
+    font-family: 'Formular-medium';
+    font-size: 16px;
+    line-height: 20px;
+    color: #828282;
+    border: none;
+    border-radius: 5px;
+}
+.prev--button:hover{
+    text-decoration: none;
+    color: #828282;
+}
+.next--button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 50px;
+    background-color: #FF5722;
+    font-family: 'Formular-medium';
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+}
+.next--button:hover{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.room--button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFAB91;
+    border: 2px solid #FFAB91;
+    box-sizing: border-box;
+    font-family: 'Formular-medium';
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 100px;
+    min-width: 130px;
+    height: 40px;
+}
+.room--button.active{
+    background-color: #FF5722;
+    color: #FFFFFF;
+    border: none;
+}
+.room--button:hover{
+    text-decoration: none;
+    color: #FFAB91;
+}
+
+@media(max-width: 1199px){
+    .room--button{
+        margin-bottom:20px;
+    }
+}
+
+@media(max-width: 767px){
+    .nav__prev--button{
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+    .nav__next--button{
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+    .rooms--button-group{
+        margin-bottom: 20px;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}

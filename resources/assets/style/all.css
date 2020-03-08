@@ -1,0 +1,26 @@
+@import url('components/header.css');
+@import url('components/title.css');
+@import url('components/button.css');
+@import url('components/main.css');
+@import url('components/layout.css');
+@import url('components/rooms.css');
+@import url('components/result.css');
+
+@font-face{
+	font-family: "Formular-medium";
+	src: url("../font/Formular-Medium.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face{
+	font-family: "Formular";
+	src: url("../font/Formular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+.disabledbutton {
+	pointer-events: none;
+	opacity: 0.4;
+}
+

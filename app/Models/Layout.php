@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Layout extends Model
 {
-    public function rooms()
+    protected $fillable = ['space', 'rooms_count'];
+    protected $with = ['roomTypes', 'images'];
+    public function roomTypes()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsToMany(RoomType::class)->withPivot('id');
     }
 
     public function images()
@@ -18,6 +20,6 @@ class Layout extends Model
 
     public function appartmentComplexes()
     {
-        return $this->belongsToMany(ApartmentComplex::class);
+        return $this->belongsToMany(ApartmentComplex::class)->withPivot('id');
     }
 }

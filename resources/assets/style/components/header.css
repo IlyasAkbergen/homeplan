@@ -1,0 +1,15 @@
+.header{
+    border-bottom: 1px solid #E0E0E0;
+}
+.header__inner{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header__text{
+    font-family: 'Formular-medium';
+    color: #FF5722;
+    font-size: 28px;
+    line-height: 34px;
+}
