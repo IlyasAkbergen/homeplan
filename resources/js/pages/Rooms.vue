@@ -13,7 +13,7 @@
                             <div class="col-xl" v-for="(roomType, index) in selectedLayout.roomTypes">
                                 <a
                                     href="#"
-                                    :class="`room--button ${selectedRoomType.id === roomType.id ? 'active' : ''}`"
+                                    :class="`room--button ${selectedRoomType.pivot_id === roomType.pivot_id ? 'active' : ''}`"
                                     @click="setSelectedRoomTypeIndex(index)"
                                 >
                                     {{ roomType.name }}
@@ -32,11 +32,11 @@
                 <div class="row">
                     <div class="col-xl-4 col-md-6 col-sm-12"
                          v-for="room in rooms"
-                         @click="pushSelectedRoom(room.id)"
+                         @click="setSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })"
                          :key="room.id"
                     >
                         <div
-                            :class="`card rooms--card ${ selectedRooms.includes(room.id) ? 'active' : '' }`"
+                            :class="`card rooms--card ${ currentSelectedRoomId === room.id ? 'active' : '' }`"
                         >
                             <div class="rooms__card-image">
                                 <img :src="room.images[0].path" class="card-img-top">
@@ -69,7 +69,7 @@
             ...mapGetters(['selectedLayout']),
             allowNext () {
                 return this.selectedLayout.roomTypes
-                    && this.selectedLayout.roomTypes.length === this.selectedRooms.length
+                    && this.selectedLayout.roomTypes.length === Object.keys(this.selectedRooms).length
             },
             selectedRoomType () {
                 return this.selectedLayout && this.selectedLayout.roomTypes
@@ -79,12 +79,15 @@
             rooms () {
                 return this.selectedRoomType ? this.selectedRoomType.rooms : []
             },
+            currentSelectedRoomId () {
+                return this.selectedRooms[this.selectedRoomType.pivot_id] ?? {}
+            }
         },
         methods: {
             setSelectedRoomTypeIndex (value) {
                 this.selectedRoomTypeIndex = value
             },
-            ...mapMutations('order', ['pushSelectedRoom']),
+            ...mapMutations('order', ['setSelectedRoom']),
         },
     }
 </script>
