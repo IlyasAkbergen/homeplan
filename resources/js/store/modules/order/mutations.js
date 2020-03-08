@@ -11,7 +11,8 @@ export default {
         state.selectedLayoutId = value
     },
 
-    pushSelectedRoom(state, value) {
-        state.selectedRooms.push(value)
+    setSelectedRoom(state, {value, roomTypePivotId}) {
+        console.log(value, roomTypePivotId);
+        state.selectedRooms = {...state.selectedRooms, ...{ [roomTypePivotId]: value }};
     }
 }
