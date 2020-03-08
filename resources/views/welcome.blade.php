@@ -16,5 +16,7 @@
         <app />
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('assets/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/javascript/slider.js') }}"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header />
         <StepInfo step="2">Какая у вас <span>планировка?</span></StepInfo>
         <section class="layout">
             <div class="container-fluid">
@@ -40,7 +39,6 @@
             StepInfo: () => import('../components/StepInfo'),
             BackButton: () => import('../components/BackButton'),
             NextButton: () => import('../components/NextButton'),
-            Header: () => import('../components/Header')
         },
         computed: {
             ...mapGetters({
