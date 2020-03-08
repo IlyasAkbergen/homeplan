@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header />
         <StepInfo step="1">
             Выберите ваш <span>ЖК</span>
         </StepInfo>
@@ -47,7 +46,6 @@
         name: "FirstStep",
         components: {
             StepInfo: () => import('../components/StepInfo'),
-            Header: () => import('../components/Header'),
             NextButton: () => import('../components/NextButton'),
         },
         methods: {

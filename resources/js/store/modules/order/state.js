@@ -3,4 +3,5 @@ export default {
     selectedRoomsCount: 1,
     selectedLayoutId: null,
     selectedRooms: {},
+    orderResult: {},
 }

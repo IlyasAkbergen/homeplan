@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header />
         <StepInfo step="3">
             Выберите стиль для комнаты: <span>{{ selectedRoomType ? selectedRoomType.name : '' }}</span>
         </StepInfo>
@@ -57,7 +56,6 @@
             StepInfo: () => import('../components/StepInfo'),
             BackButton: () => import('../components/BackButton'),
             NextButton: () => import('../components/NextButton'),
-            Header: () => import('../components/Header')
         },
         data(){
             return {
