@@ -10,6 +10,6 @@ class ApartmentComplex extends Model
 
     public function layouts()
     {
-        return $this->belongsToMany(Layout::class);
+        return $this->belongsToMany(Layout::class)->withPivot('id');
     }
 }

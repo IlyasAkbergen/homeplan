@@ -10,7 +10,7 @@ class Layout extends Model
     protected $with = ['roomTypes', 'images'];
     public function roomTypes()
     {
-        return $this->belongsToMany(RoomType::class);
+        return $this->belongsToMany(RoomType::class)->withPivot('id');
     }
 
     public function images()
@@ -20,6 +20,6 @@ class Layout extends Model
 
     public function appartmentComplexes()
     {
-        return $this->belongsToMany(ApartmentComplex::class);
+        return $this->belongsToMany(ApartmentComplex::class)->withPivot('id');
     }
 }
