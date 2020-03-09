@@ -41,7 +41,18 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $input = $request->only(['clientName', 'clientPhone']);
+
+        $order->update([
+            'client_name' => $input['clientName'],
+            'phone' => $input['clientPhone'],
+        ]);
+
+//        event(new OrderCreated()); // todo
+
+        return $this->responseSuccess(new OrderResource($order));
     }
 
     public function destroy($id)
