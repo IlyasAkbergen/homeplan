@@ -20,6 +20,10 @@ class OrderResource extends JsonResource
             'layout' => new LayoutResource($this->layout),
             'price'=>$this->getPrice(),
             'rooms' => RoomResource::collection($this->rooms),
+            'status' => $this->status,
+            'clientName' => $this->client_name,
+            'phone' => $this->phone,
+            'email' => $this->email,
         ];
     }
 }

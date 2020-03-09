@@ -22,17 +22,19 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from "./store";
+import VueMask from 'v-mask'
 
-import { CarouselPlugin } from 'bootstrap-vue'
+import { CarouselPlugin, BCarousel, BCarouselSlide, BImg, BModal, BButton } from 'bootstrap-vue'
 Vue.use(CarouselPlugin);
-import { BCarousel } from 'bootstrap-vue'
 Vue.component('b-carousel', BCarousel);
-import { BCarouselSlide } from 'bootstrap-vue'
 Vue.component('b-carousel-slide', BCarouselSlide);
-import { BImg } from 'bootstrap-vue'
-Vue.component('b-img', BImg)
+Vue.component('b-img', BImg);
+Vue.component('b-modal', BModal);
+Vue.component('b-button', BButton);
 // plugins
 import './plugins/axios'
+
+Vue.use(VueMask);
 
 Vue.config.productionTip = false;
 

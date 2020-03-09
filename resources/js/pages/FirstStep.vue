@@ -44,6 +44,11 @@
 
     export default {
         name: "FirstStep",
+        data(){
+            return {
+                email: '',
+            }
+        },
         components: {
             StepInfo: () => import('../components/StepInfo'),
             NextButton: () => import('../components/NextButton'),

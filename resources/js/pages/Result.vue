@@ -76,9 +76,16 @@
                                 </div>
                                 <div class="result__content--input">
                                     <h4>Оформить заказ</h4>
-                                    <input type="text" placeholder="Имя">
-                                    <input type="text" placeholder="Телефон">
-                                    <button>оформить</button>
+                                    <form @submit.prevent="submitForm">
+                                        <input type="text" placeholder="Имя" v-model="clientname" required>
+                                        <input type="text"
+                                               placeholder="Телефон"
+                                               v-model="clientphone"
+                                               v-mask="`+7(###)-###-##-##`"
+                                               required
+                                        >
+                                        <button type="submit">оформить</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -86,18 +93,25 @@
                 </div>
             </section>
         </div>
+        <b-modal ref="order-created-modal" hide-footer>
+            <div class="d-block text-center">
+                <h3>Ваша заявка успешно создана!</h3>
+            </div>
+            <b-button
+                    class="mt-3"
+                    block
+                    @click="hideModal"
+            >На главную</b-button>
+        </b-modal>
     </div>
 </template>
 
-<!--<script type="text/javascript" src="../../assets/javascript/slider.js"></script>-->
-<!--<script type="text/javascript" src="../../assets/slick/slick.min.js"></script>-->
-
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapMutations, mapState } from 'vuex';
     export default {
         name: "Result",
         component: {
-            Loader: () => import('../components/Loader')
+            Loader: () => import('../components/Loader'),
         },
         data(){
             return {
@@ -117,6 +131,27 @@
             setSlide(num){
                 this.slide = num;
 
+            },
+            ...mapActions('order', [
+                'getOrderResult',
+                'setOrderClientInfo'
+            ]),
+            ...mapMutations('order', [
+                'setClientName',
+                'setPhone',
+            ]),
+            submitForm () {
+                this.setOrderClientInfo({
+                    id: this.orderResult.id,
+                    clientName: this.clientname,
+                    clientPhone: this.clientphone,
+                }).then(() => {
+                    this.$refs['order-created-modal'].show();
+                });
+            },
+            hideModal(){
+                this.$refs['order-created-modal'].hide();
+                this.$router.push('/');
             }
         },
         computed: {
@@ -124,7 +159,25 @@
                 'selectedComplexId',
                 'selectedLayoutId',
                 'selectedRooms',
+                'clientName',
+                'phone'
             ]),
+            clientname: {
+                get () {
+                    return this.clientName;
+                },
+                set (value) {
+                    this.setClientName(value);
+                }
+            },
+            clientphone: {
+                get () {
+                    return this.phone;
+                },
+                set (value) {
+                    this.setPhone(value);
+                }
+            }
         },
         created(){
             this.getOrderResult({
@@ -134,10 +187,7 @@
             }).then(() => {
                 this.resultIsReady = true;
             })
-
         }
-
-
     }
 </script>
 

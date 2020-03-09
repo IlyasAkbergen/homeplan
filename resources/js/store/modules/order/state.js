@@ -4,4 +4,6 @@ export default {
     selectedLayoutId: null,
     selectedRooms: {},
     orderResult: {},
+    clientName: '',
+    phone: '',
 }
