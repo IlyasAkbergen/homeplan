@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="row justify-content-between">
                                     <h3>итого:</h3>
-                                    <h3>79 000 тг.</h3>
+                                    <h3>{{orderResult.price}}тг.</h3>
                                 </div>
                                 <div class="result__content--input">
                                     <h4>Оформить заказ</h4>
