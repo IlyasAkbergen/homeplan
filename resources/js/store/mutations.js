@@ -3,5 +3,8 @@
 export default {
     setAllComplexes(state, data){
         state.allComplexes = data
+    },
+    setAllRoomTypes(state,data){
+        state.allRoomTypes = data
     }
 }

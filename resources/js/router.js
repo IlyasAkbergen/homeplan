@@ -4,6 +4,7 @@ import FirstStep from "./pages/FirstStep";
 import Layouts from "./pages/Layouts";
 import Rooms from "./pages/Rooms";
 import Result from "./pages/Result";
+import CustomApartment from "./pages/CustomApartment";
 
 Vue.use(Router);
 
@@ -25,6 +26,10 @@ export default new Router({
         {
             path: '/result',
             component: Result,
+        },
+        {
+            path: '/custom-apartment',
+            component: CustomApartment,
         }
     ]
 })
