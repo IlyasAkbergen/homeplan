@@ -1,11 +1,30 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div>
         <div v-show="resultIsReady">
-            <section class="result" id="result">
-                <div class="result-slider"v-for="room in orderResult.rooms" :key="room.order_pivot_id">
-                    <img :src="room.images[0].path">
-                </div>
-            </section>
+                <b-carousel
+                        id="carousel-1"
+                        v-model="slide"
+                        :interval="4000"
+                        background="#ababab"
+                        img-width="1366"
+                        img-height="180"
+                        style="text-shadow: 1px 1px 2px #333;"
+                        @sliding-start="onSlideStart"
+                        @sliding-end="onSlideEnd"
+                        touch
+                >
+                    <b-carousel-slide v-for="(room,index) in orderResult.rooms" :key="index">
+                        <template v-slot:img>
+                            <img
+                                    class="d-block img-fluid w-100 class-name"
+                                    width="1024"
+                                    height="180"
+                                    :src="room.images[0].path"
+                                    alt="image slot">
+                        </template>
+                    </b-carousel-slide>
+                </b-carousel>
+
 
             <section class="result__content">
                 <div class="container-fluid">
@@ -14,8 +33,9 @@
                             <div class="col-lg-6 result__content--design ">
                                 <div class="row">
                                     <a href="#"
-                                       v-for="room in orderResult.rooms"
-                                       class="result__content--link active"
+                                       v-for="(room, index) in orderResult.rooms"
+                                       @click = "setSlide(index)"
+                                       :class="`result__content--link ${index===slide ? 'active':''}`"
                                     >{{ room.type.name }}</a>
                                 </div>
                                 <h1>В дизайн-проект входит:</h1>
@@ -83,9 +103,22 @@
         data(){
             return {
                 resultIsReady: false,
+                slide:0,
+                sliding: null,
             }
         },
         methods: {
+            ...mapActions('order', ['getOrderResult']),
+            onSlideStart(slide) {
+                this.sliding = true
+            },
+            onSlideEnd(slide) {
+                this.sliding = false
+            },
+            setSlide(num){
+                this.slide = num;
+
+            }
             ...mapActions('order', [
                 'getOrderResult',
                 'setOrderClientInfo'
@@ -135,7 +168,10 @@
             }).then(() => {
                 this.resultIsReady = true;
             })
+
         }
+
+
     }
 </script>
 
@@ -143,3 +179,16 @@
     @import '../../assets/slick/slick.css';
     @import "../../assets/slick/slick-theme.css";
 </style>
+
+<style>
+    .class-name{
+        max-width:100%;
+        /*width: 100%;*/
+        min-height: 40vh;
+        /*object-fit: cover;*/
+        max-height:600px;
+
+    }
+</style>
+
+
