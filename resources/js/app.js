@@ -23,6 +23,14 @@ import App from './App.vue'
 import router from './router'
 import store from "./store";
 
+import { CarouselPlugin } from 'bootstrap-vue'
+Vue.use(CarouselPlugin);
+import { BCarousel } from 'bootstrap-vue'
+Vue.component('b-carousel', BCarousel);
+import { BCarouselSlide } from 'bootstrap-vue'
+Vue.component('b-carousel-slide', BCarouselSlide);
+import { BImg } from 'bootstrap-vue'
+Vue.component('b-img', BImg)
 // plugins
 import './plugins/axios'
 
