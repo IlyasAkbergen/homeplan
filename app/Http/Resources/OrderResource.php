@@ -19,6 +19,7 @@ class OrderResource extends JsonResource
             'complex' => new ApartmentComplexResource($this->apartmentComplex),
             'layout' => new LayoutResource($this->layout),
             'rooms' => RoomResource::collection($this->rooms),
+            'status' => $this->status,
         ];
     }
 }

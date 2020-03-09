@@ -56,9 +56,13 @@
                                 </div>
                                 <div class="result__content--input">
                                     <h4>Оформить заказ</h4>
-                                    <input type="text" placeholder="Имя">
-                                    <input type="text" placeholder="Телефон">
-                                    <button>оформить</button>
+                                    <input type="text" placeholder="Имя" v-model="clientname">
+                                    <input type="text"
+                                           placeholder="Телефон"
+                                           v-model="clientphone"
+                                           v-mask="`+7(###)-###-##-##`"
+                                    >
+                                    <button @click="submitForm">оформить</button>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +74,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapMutations, mapState } from 'vuex';
     export default {
         name: "Result",
         component: {
@@ -82,14 +86,46 @@
             }
         },
         methods: {
-            ...mapActions('order', ['getOrderResult']),
+            ...mapActions('order', [
+                'getOrderResult',
+                'setOrderClientInfo'
+            ]),
+            ...mapMutations('order', [
+                'setClientName',
+                'setPhone',
+            ]),
+            submitForm () {
+                this.setOrderClientInfo({
+                    id: this.orderResult.id,
+                    clientName: this.clientname,
+                    clientPhone: this.clientphone,
+                }).then((r) => console.log(r));
+            }
         },
         computed: {
             ...mapState('order', ['orderResult',
                 'selectedComplexId',
                 'selectedLayoutId',
                 'selectedRooms',
+                'clientName',
+                'phone'
             ]),
+            clientname: {
+                get () {
+                    return this.clientName;
+                },
+                set (value) {
+                    this.setClientName(value);
+                }
+            },
+            clientphone: {
+                get () {
+                    return this.phone;
+                },
+                set (value) {
+                    this.setPhone(value);
+                }
+            }
         },
         created(){
             this.getOrderResult({

@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "v-mask": "^2.0.2",
+        "vee-validate": "^3.2.5",
         "vue-router": "^3.1.6",
         "vuex": "^3.1.2"
     }

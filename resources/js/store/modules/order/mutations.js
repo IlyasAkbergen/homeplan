@@ -17,5 +17,13 @@ export default {
 
     setOrderResult(state, value) {
         state.orderResult = value
+    },
+
+    setClientName(state, value) {
+        state.clientName = value;
+    },
+
+    setPhone(state, value) {
+        state.phone = value;
     }
 }
