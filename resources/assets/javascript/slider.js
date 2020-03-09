@@ -3,8 +3,8 @@ $(".result").slick({
     autoplay: true,
     autoplaySpeed: 5000,
     dots: false,
-    prevArrow: '<div class="result__slider--button left"><button class="slider--button"><img src="img/prev.png"></button></div>',
-	nextArrow: '<div class="result__slider--button right"><button class="slider--button"><img src="img/next.png"></button></div>',	
+    prevArrow: '<div class="result__slider--button left"><button class="slider--button"><img src="./img/prev.png"></button></div>',
+	nextArrow: '<div class="result__slider--button right"><button class="slider--button"><img src="./img/next.png"></button></div>',
     responsive: [
         {
             breakpoint: 1024,

@@ -2,81 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
+use App\Models\UserLog;
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $input = $request->only(['selectedComplexId', 'selectedLayoutId', 'selectedRooms']);
+
+        $order = Order::create([
+            'apartment_complex_id' => $input['selectedComplexId'],
+            'layout_id' => $input['selectedLayoutId'],
+            'client_name' => 'temp',
+            'email' => 'temp',
+            'phone' => '',
+        ]);
+
+        $order->rooms()->attach(
+            collect($input['selectedRooms'])->values()
+        );
+
+        UserLog::createLog('Создание заявки', 'Была создана заявка', $request->all());
+
+        $order->load(['apartmentComplex', 'rooms', 'rooms.images', 'rooms.type']);
+
+        return $this->responseSuccess(
+            new OrderResource($order)
+        );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $input = $request->only(['clientName', 'clientPhone']);
+
+        $order->update([
+            'client_name' => $input['clientName'],
+            'phone' => $input['clientPhone'],
+        ]);
+
+//        event(new OrderCreated()); // todo
+
+        return $this->responseSuccess(new OrderResource($order));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

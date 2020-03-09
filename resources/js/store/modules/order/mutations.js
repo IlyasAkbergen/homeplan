@@ -12,7 +12,18 @@ export default {
     },
 
     setSelectedRoom(state, {value, roomTypePivotId}) {
-        console.log(value, roomTypePivotId);
         state.selectedRooms = {...state.selectedRooms, ...{ [roomTypePivotId]: value }};
+    },
+
+    setOrderResult(state, value) {
+        state.orderResult = value
+    },
+
+    setClientName(state, value) {
+        state.clientName = value;
+    },
+
+    setPhone(state, value) {
+        state.phone = value;
     }
 }

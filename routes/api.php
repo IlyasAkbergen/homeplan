@@ -19,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/complexes/','ApartmentComplexController@getAll');
+
 Route::get('/layouts/get-by-complex/{complex}','LayoutController@getLayoutsByComplex');
+
+Route::apiResource('orders', 'OrderController');

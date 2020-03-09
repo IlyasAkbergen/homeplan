@@ -16,6 +16,9 @@ class RoomResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'order_pivot_id'=>$this->whenPivotLoaded('order_room', function () {
+                return $this->pivot->id;
+            }),
             'space' => $this->space,
             'price' => $this->price,
             'type' => $this->when($this->relationLoaded('type'),

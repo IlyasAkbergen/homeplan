@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header />
         <StepInfo step="1">
             Выберите ваш <span>ЖК</span>
         </StepInfo>
@@ -45,9 +44,13 @@
 
     export default {
         name: "FirstStep",
+        data(){
+            return {
+                email: '',
+            }
+        },
         components: {
             StepInfo: () => import('../components/StepInfo'),
-            Header: () => import('../components/Header'),
             NextButton: () => import('../components/NextButton'),
         },
         methods: {
