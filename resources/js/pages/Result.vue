@@ -76,13 +76,16 @@
                                 </div>
                                 <div class="result__content--input">
                                     <h4>Оформить заказ</h4>
-                                    <input type="text" placeholder="Имя" v-model="clientname">
-                                    <input type="text"
-                                           placeholder="Телефон"
-                                           v-model="clientphone"
-                                           v-mask="`+7(###)-###-##-##`"
-                                    >
-                                    <button @click="submitForm">оформить</button>
+                                    <form @submit.prevent="submitForm">
+                                        <input type="text" placeholder="Имя" v-model="clientname" required>
+                                        <input type="text"
+                                               placeholder="Телефон"
+                                               v-model="clientphone"
+                                               v-mask="`+7(###)-###-##-##`"
+                                               required
+                                        >
+                                        <button type="submit">оформить</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +121,7 @@
             setSlide(num){
                 this.slide = num;
 
-            }
+            },
             ...mapActions('order', [
                 'getOrderResult',
                 'setOrderClientInfo'
@@ -168,10 +171,7 @@
             }).then(() => {
                 this.resultIsReady = true;
             })
-
         }
-
-
     }
 </script>
 
