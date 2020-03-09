@@ -2,7 +2,7 @@
     <div>
         <div v-show="resultIsReady">
             <section class="result" id="result">
-                <div class="result-slider" v-for="room in orderResult.rooms" :key="room.id">
+                <div class="result-slider"v-for="room in orderResult.rooms" :key="room.order_pivot_id">
                     <img :src="room.images[0].path">
                 </div>
             </section>

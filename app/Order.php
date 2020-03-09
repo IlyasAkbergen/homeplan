@@ -23,7 +23,8 @@ class Order extends Model
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsToMany(Room::class)
+            ->withPivot('id');
     }
 
     public function getPrice()
