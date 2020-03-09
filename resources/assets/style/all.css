@@ -24,3 +24,11 @@
 	opacity: 0.4;
 }
 
+.underlined{
+	text-decoration: underline;
+}
+
+.slider__links a:hover {
+	text-decoration: underline;
+}
+
