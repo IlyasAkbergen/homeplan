@@ -11,7 +11,6 @@ export default {
     setOrderClientInfo ({ commit }, data) {
         return axios.put(`/orders/${data.id}`, data)
             .then((res) => {
-                commit('setOrderResult', res.data.result);
                 return res
             })
     }

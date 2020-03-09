@@ -50,6 +50,8 @@ class OrderController extends Controller
             'phone' => $input['clientPhone'],
         ]);
 
+//        event(new OrderCreated()); // todo
+
         return $this->responseSuccess(new OrderResource($order));
     }
 

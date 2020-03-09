@@ -93,6 +93,16 @@
                 </div>
             </section>
         </div>
+        <b-modal ref="order-created-modal" hide-footer>
+            <div class="d-block text-center">
+                <h3>Ваша заявка успешно создана!</h3>
+            </div>
+            <b-button
+                    class="mt-3"
+                    block
+                    @click="hideModal"
+            >На главную</b-button>
+        </b-modal>
     </div>
 </template>
 
@@ -101,7 +111,7 @@
     export default {
         name: "Result",
         component: {
-            Loader: () => import('../components/Loader')
+            Loader: () => import('../components/Loader'),
         },
         data(){
             return {
@@ -135,7 +145,13 @@
                     id: this.orderResult.id,
                     clientName: this.clientname,
                     clientPhone: this.clientphone,
-                }).then((r) => console.log(r));
+                }).then(() => {
+                    this.$refs['order-created-modal'].show();
+                });
+            },
+            hideModal(){
+                this.$refs['order-created-modal'].hide();
+                this.$router.push('/');
             }
         },
         computed: {

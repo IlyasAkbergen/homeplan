@@ -26,14 +26,6 @@
                             <button :class="getClassOfRoomCount(5)" @click="setRoomsCount(5)">5+</button>
                         </div>
                     </div>
-
-                    <validation-provider rules="required|min:3" v-slot="{ errors }">
-                        <input v-model="email" type="text" />
-                        <ul>
-                            <li v-for="error in errors">{{ error }}</li>
-                        </ul>
-                    </validation-provider>
-                    
                     <div class="row justify-content-center">
                         <NextButton
                             nextPath="/layouts"
