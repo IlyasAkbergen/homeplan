@@ -5,6 +5,7 @@ import Layouts from "./pages/Layouts";
 import Rooms from "./pages/Rooms";
 import Result from "./pages/Result";
 import CustomApartment from "./pages/CustomApartment";
+import CustomRoomTypes from  "./pages/CustomRoomTypes";
 
 Vue.use(Router);
 
@@ -30,6 +31,10 @@ export default new Router({
         {
             path: '/custom-apartment',
             component: CustomApartment,
+        },
+        {
+            path: '/custom-room-types',
+            component: CustomRoomTypes,
         }
     ]
 })

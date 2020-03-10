@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class RoomTypeController extends Controller
 {
     public function getAll(){
-        return $this->responseSuccess(RoomTypeResource::collection(RoomType::with("rooms")->get()));
+        return $this->responseSuccess(
+            RoomTypeResource::collection(
+                RoomType::with(['rooms', 'rooms.images'])->get()
+            )
+        );
     }
 }

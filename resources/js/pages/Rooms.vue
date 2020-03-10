@@ -6,13 +6,15 @@
         <section class="rooms">
             <div class="container-fluid">
                 <div class="rooms__inner row align-items-center justify-content-between">
-                    <BackButton prevPath="/layouts" />
+                    <BackButton :prevPath="`${selectedComplexId === 'none' ? '/custom-room-types' : '/layouts'}`" />
                     <div class="col-md-8">
                         <div class="row justify-content-around">
-                            <div class="col-xl" v-for="(roomType, index) in selectedLayout.roomTypes">
+                            <div class="col-xl" v-for="(roomType, index) in selectedRoomTypes">
                                 <a
                                     href="#"
-                                    :class="`room--button ${selectedRoomType.pivot_id === roomType.pivot_id ? 'active' : ''}`"
+                                    :class="`room--button ${
+                                      selectedRoomType.pivot_id === roomType.pivot_id
+                                        ? 'active' : ''}`"
                                     @click="setSelectedRoomTypeIndex(index)"
                                 >
                                     {{ roomType.name }}
@@ -63,15 +65,15 @@
             }
         },
         computed: {
-            ...mapState('order', ['selectedRooms']),
-            ...mapGetters(['selectedLayout']),
+            ...mapState('order', ['selectedRooms', 'selectedComplexId']),
+            ...mapGetters(['selectedRoomTypes']),
             allowNext () {
-                return this.selectedLayout.roomTypes
-                    && this.selectedLayout.roomTypes.length === Object.keys(this.selectedRooms).length
+                return this.selectedRoomTypes
+                    && this.selectedRoomTypes.length === Object.keys(this.selectedRooms).length
             },
             selectedRoomType () {
-                return this.selectedLayout && this.selectedLayout.roomTypes
-                    ? this.selectedLayout.roomTypes[this.selectedRoomTypeIndex]
+                return this.selectedRoomTypes
+                    ? this.selectedRoomTypes[this.selectedRoomTypeIndex]
                     : null;
             },
             rooms () {
@@ -79,7 +81,7 @@
             },
             currentSelectedRoomId () {
                 return this.selectedRooms[this.selectedRoomType.pivot_id] ?? {}
-            }
+            },
         },
         methods: {
             setSelectedRoomTypeIndex (value) {

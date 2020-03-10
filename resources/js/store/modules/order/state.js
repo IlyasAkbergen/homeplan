@@ -6,4 +6,6 @@ export default {
     orderResult: {},
     clientName: '',
     phone: '',
+    customComplex: {},
+    customRoomTypes: [],
 }

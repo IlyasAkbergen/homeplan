@@ -1,15 +1,21 @@
 <template>
-    <div class="loadingio-spinner-chunk-7whubcoornf">
-        <div class="ldio-lqqsvss1b">
-            <div>
-                <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 mt-5">
+            <div class="loadingio-spinner-chunk-7whubcoornf">
+                <div class="ldio-lqqsvss1b">
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-4"></div>
     </div>
 </template>
 

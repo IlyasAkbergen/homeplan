@@ -14,8 +14,8 @@ class OrderController extends Controller
         $input = $request->only(['selectedComplexId', 'selectedLayoutId', 'selectedRooms']);
 
         $order = Order::create([
-            'apartment_complex_id' => $input['selectedComplexId'],
-            'layout_id' => $input['selectedLayoutId'],
+            'apartment_complex_id' => $input['selectedComplexId'] !== 'none' ? :0,
+            'layout_id' => isset($input['selectedLayoutId']) ? :0,
             'client_name' => 'temp',
             'email' => 'temp',
             'phone' => '',
