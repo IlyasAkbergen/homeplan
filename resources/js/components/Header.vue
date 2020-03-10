@@ -1,13 +1,13 @@
 <template>
     <header class="header">
         <div class="container-fluid">
-            <router-link to="/" class="text-decoration-none">
+            <a href="/" class="text-decoration-none">
                 <div class="header__inner">
                         <h1 class="header__text">
                             homeplan
                         </h1>
                 </div>
-            </router-link>
+            </a>
         </div>
     </header>
 </template>

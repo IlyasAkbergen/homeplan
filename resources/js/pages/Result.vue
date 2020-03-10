@@ -153,6 +153,7 @@
             hideModal(){
                 this.$refs['order-created-modal'].hide();
                 this.$router.push('/');
+                location.reload();
             }
         },
         computed: {
