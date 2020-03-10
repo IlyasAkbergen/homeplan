@@ -10,7 +10,10 @@
                         <div class="col-xl-6 col-lg-8 col-md-10">
                             <select class="main__select" v-model="complex">
                                 <option :value="null">выбрать ЖК</option>
-                                <option v-for="complex in allComplexes" :value="complex.id">{{ complex.name }}</option>
+                                <option v-for="complex in allComplexes"
+                                        :value="complex.id"
+                                >{{ complex.name }}</option>
+                                <option value="none">Другой</option>
                             </select>
                         </div>
                     </div>
@@ -28,7 +31,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <NextButton
-                            nextPath="/layouts"
+                            :nextPath="`${complex === 'none' ? '/custom-apartment' : '/layouts/'}`"
                             centered
                             :disabled="!allowNext"
                         />
@@ -44,11 +47,6 @@
 
     export default {
         name: "FirstStep",
-        data(){
-            return {
-                email: '',
-            }
-        },
         components: {
             StepInfo: () => import('../components/StepInfo'),
             NextButton: () => import('../components/NextButton'),

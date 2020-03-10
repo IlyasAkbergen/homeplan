@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomType extends Model
 {
-
+    protected $fillable = ['name', 'icon'];
     public function layouts(){
         return $this->belongsToMany(Layout::class)->withPivot('id');
     }

@@ -93,6 +93,7 @@
                 </div>
             </section>
         </div>
+        <Loader v-show="!resultIsReady" />
         <b-modal ref="order-created-modal" hide-footer>
             <div class="d-block text-center">
                 <h3>Ваша заявка успешно создана!</h3>
@@ -110,7 +111,7 @@
     import { mapActions, mapMutations, mapState } from 'vuex';
     export default {
         name: "Result",
-        component: {
+        components: {
             Loader: () => import('../components/Loader'),
         },
         data(){
@@ -152,6 +153,7 @@
             hideModal(){
                 this.$refs['order-created-modal'].hide();
                 this.$router.push('/');
+                location.reload();
             }
         },
         computed: {

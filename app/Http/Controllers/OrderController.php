@@ -14,8 +14,8 @@ class OrderController extends Controller
         $input = $request->only(['selectedComplexId', 'selectedLayoutId', 'selectedRooms']);
 
         $order = Order::create([
-            'apartment_complex_id' => $input['selectedComplexId'],
-            'layout_id' => $input['selectedLayoutId'],
+            'apartment_complex_id' => $input['selectedComplexId'] !== 'none' ? :0,
+            'layout_id' => isset($input['selectedLayoutId']) ? :0,
             'client_name' => 'temp',
             'email' => 'temp',
             'phone' => '',
@@ -52,6 +52,42 @@ class OrderController extends Controller
 
 //        event(new OrderCreated()); // todo
 
+        $token = env("TELEGRAM_BOT_TOKEN");
+        $chat_id = env("TELEGRAM_CHAT_ID");
+        $complex = "";
+        $layout = "";
+        if(isset($order->apartmentComplex)){
+            $complex = $order->apartmentComplex->name." | ".$order->apartmentComplex->address;
+            $layout = $order->layout->space."м2 комнаты: ".$order->layout->rooms_count;
+        }else{
+            $complex = "НЕТ ДАННЫХ";
+            $layout = "НЕТ ДАННЫХ";
+        }
+
+        $rooms = "\n";
+
+        foreach ($order->rooms as $room){
+            $rooms.="Тип: ".$room->type->name." | Стиль: ".$room->style->name."\n";
+        }
+
+        $arr = array(
+            'Имя: '=>$input['clientName'],
+            'Телефон: '=>$input['clientPhone'],
+            "Жилой комплекс: "=>$complex,
+            "Планировка: "=>$layout,
+            "Команты: "=>$rooms,
+            "Цена: "=>$order->getPrice()
+
+        );
+
+        $txt = "";
+        $txt .=urlencode("<b>--------------------------------</b>\n");
+        $txt .=urlencode("<b>НОВАЯ ЗАЯВКА!!!</b>\n");
+        foreach($arr as $key => $value) {
+            $txt .= urlencode("<b>".$key."</b> ".$value."\n");
+        };
+        $txt .=urlencode("<b>--------------------------------</b>\n");
+        $sendToTelegram = fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}","r");
         return $this->responseSuccess(new OrderResource($order));
     }
 
