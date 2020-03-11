@@ -31,7 +31,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <NextButton
-                            :nextPath="`${complex === 'none' ? '/custom-apartment' : '/layouts/'}`"
+                            :nextPath="`${complex === 'none' ? '/custom-apartment' : '/layouts'}`"
                             centered
                             :disabled="!allowNext"
                         />
