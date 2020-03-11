@@ -6,10 +6,10 @@
         <section class="layout">
             <div class="container-fluid">
                 <div class="layout__inner row justify-content-between">
-                    <BackButton prevPath="/custom-apartment" />
+                    <BackButton prevPath="/" />
                     <div class="col-md-8 mt-5">
                         <div class="row">
-                            <div class="col-md-3 mb-4"v-for="roomType in allRoomTypes">
+                            <div class="col-md-3 mb-4" v-for="roomType in allRoomTypes">
                                 <div :class="`circle mx-auto ${customRoomTypes
                                         .some((c) => c.id === roomType.id)
                                             ? 'circle-selected' : ''}`">
