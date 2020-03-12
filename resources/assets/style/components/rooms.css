@@ -15,14 +15,16 @@
     font-family: 'Formular';
     font-size: 16px;
     line-height: 20px;
-    color: #BF360C;
+    color:#FF5722;
+    margin-bottom: 0;
 }
 .rooms__card-image{
     max-width: 445px;
     height: 350px;
     align-self: center;
+    position: relative;
 }
-.rooms__card-image img{
+.rooms__card-image > img{
     width:100%;
     height: 100%;
     object-fit: cover;
@@ -31,17 +33,80 @@
 .rooms--card{
     border:none;
 }
-.rooms--card img:hover{
-    /* box-shadow: 0px 0px 15px 0px rgba(255,87,34,0.71); */
-    border: 2px solid #FF5722;
-}
-.rooms--card.active img{
+
+.rooms--card.active > img{
     box-shadow: 0px 0px 15px 0px rgba(255,87,34,0.71);
     border: 2px solid #FF5722;
 }
-
+.rooms__card--image__wrapper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.7s;
+}
+.rooms__card--image__wrapper img{
+    width: 20px;
+    height: 20px;
+}
+.rooms--card:hover .rooms__card--image__wrapper{
+    opacity: 1;
+    transition: 0.7s;
+}
+.rooms__card--image__layer{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.rooms__card--image__layer a{
+    display: inline-block;
+    padding: 12px 20px;
+    background-color:#FF5722;
+    border-radius: 100px;
+    color: #FFFFFF;
+    font-family: 'Formular-medium';
+    font-size: 14px;
+    line-height: 17px;
+}
+.rooms__card--image__layer.active a{
+    background-color:#34C759;
+}
+.rooms__card--image__layer a:hover{
+    text-decoration: none;
+}
 @media (max-width:767px){
     .rooms__message{
         margin: 0 0 30px 0;
+    }
+    .rooms--card img:hover{
+        border: none;
+    }
+    .rooms--card.active img{
+        box-shadow: none;
+        border: none;
+    }
+    .rooms__card-image {
+        height: 200px;
+    }
+    .container-fluid.rooms__container{
+        padding: 0;
+    }
+    .rooms__card--image__wrapper img{
+        display: none;
+    }
+    .rooms__card--image__layer{
+        bottom: 20px;
+        top: auto;
+    }
+    .rooms__card--image__wrapper{
+        opacity: 1;
+    }
+    .col-sm-12.room-mobile{
+        padding-right: 0;
     }
 }

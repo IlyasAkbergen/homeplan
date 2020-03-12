@@ -10,13 +10,16 @@
                 <div class="rooms__inner row align-items-center justify-content-between">
                     <BackButton :onClick="backClicked" />
                     <div class="col-md-8">
-                        <div class="row justify-content-around">
-                            <div class="col-xl" v-for="(roomType, index) in selectedRoomTypes">
+                        <div class="row rooms__button__group">
+                            <div class="col-xl col-lg-3 col-md-4 col-4"
+                                 v-for="(roomType, index) in selectedRoomTypes">
                                 <a
                                     href="#"
                                     :class="`room--button ${
                                       selectedRoomType.pivot_id === roomType.pivot_id
-                                        ? 'active' : ''}`"
+                                        ? 'active' : ''}
+                                      ${ selectedRooms[roomType.pivot_id] ? 'done' : ''}
+                                    `"
                                     @click="setSelectedRoomTypeIndex(index)"
                                 >
                                     {{ roomType.name }}
@@ -29,23 +32,59 @@
                 <div class="rooms__message">
                     <h1>Выберите понравившийся интерьер</h1>
                 </div>
+            </div>
+            <div class="container-fluid rooms__container">
                 <div class="row">
-                    <div class="col-xl-4 col-md-6 col-sm-12"
-                         v-for="room in rooms"
-                         @click="setSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })"
+                    <div class="col-xl-4 col-md-6 col-sm-12 room-mobile"
+                         v-for="(room, key) in rooms"
                          :key="room.id"
                     >
-                        <div
-                            :class="`card rooms--card ${ currentSelectedRoomId === room.id ? 'active' : '' }`"
-                        >
+                        <div class="card rooms--card">
                             <div class="rooms__card-image">
-                                <img :src="room.images[0].path" class="card-img-top">
+                                <img :src="room.images[0].path" class="card-img-top zoom">
+                                <div class="rooms__card--image__wrapper">
+                                    <a href="#" class="room__zoom" @click="openZoom(key)">
+                                        <img src="../../assets/img/zoom.png">
+                                    </a>
+                                    <div
+                                         :class="`rooms__card--image__layer ${ currentSelectedRoomId === room.id ? 'active' : '' }`"
+                                    >
+                                        <a href=# @click="setSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })">
+                                            {{ currentSelectedRoomId === room.id ? 'Выбрано' : 'Выбрать' }}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <b-modal ref="zoom-modal" hide-footer>
+            <section class="getmodal" id="getmodal">
+                <div onclick="closeZoom()" class="modal__backdrop"></div>
+                <div class="modal__inner">
+                    <img onclick="closeZoom()"
+                         class="closeicon"
+                         src="../../assets/img/close.png"
+                    >
+                    <img src="../../assets/img/prev.png"
+                         class="previcon"
+                         @click="nextZoom()"
+                    >
+                    <img :src="zoomedRoom ? zoomedRoom.images[0].path : ''"
+                         id="modal-img"
+                    >
+                    <img src="../../assets/img/next.png"
+                         class="nexticon"
+                         @click="prevZoom()"
+                    >
+                    <button @click="setSelectedRoom({ value: zoomedRoom.id, roomTypePivotId: selectedRoomType.pivot_id })">
+                        Выбрать
+                    </button>
+                </div>
+            </section>
+        </b-modal>
     </div>
 </template>
 
@@ -61,6 +100,7 @@
         data(){
             return {
                 selectedRoomTypeIndex: 0,
+                zoomedRoomIndex: 0,
             }
         },
         computed: {
@@ -102,6 +142,9 @@
             },
             isFirstRoomType () {
                 return this.selectedRoomTypeIndex === 0;
+            },
+            zoomedRoom () {
+                return this.rooms ? this.rooms[this.zoomedRoomIndex] : {};
             }
         },
         methods: {
@@ -122,6 +165,23 @@
               } else {
                 return this.$router.push(this.nextPath);
               }
+            },
+            openZoom (index) {
+                this.zoomedRoomIndex = index ? index : 0;
+                this.$refs['zoom-modal'].show();
+            },
+            closeZoom () {
+                this.$refs['zoom-modal'].hide();
+            },
+            nextZoom () {
+                this.zoomedRoomIndex = this.zoomedRoomIndex + 1 === this.rooms.length
+                    ? this.zoomedRoomIndex + 1
+                    : 0;
+            },
+            prevZoom () {
+                this.zoomedRoomIndex = this.zoomedRoomIndex === 0
+                    ? this.rooms.length - 1
+                    : this.zoomedRoomIndex - 1;
             }
         },
     }
