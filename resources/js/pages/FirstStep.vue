@@ -1,7 +1,7 @@
 <template>
     <div>
         <StepInfo step="1">
-            Выберите ваш <span>ЖК</span>
+            Выберите Ваш <span>ЖК</span>
         </StepInfo>
         <section class="main" v-show="!loading">
             <div class="container">
