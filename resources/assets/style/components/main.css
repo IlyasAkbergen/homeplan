@@ -4,6 +4,21 @@
 .main__inner{
     padding-top: 30px;
 }
+.main__selectbox{
+    position: relative;
+    display: inline-block;
+}
+.main__selectbox::after{
+    content: "";
+    height: 9px;
+    width: 9px;
+    border-right: 2px solid #BDBDBD;
+    border-bottom: 2px solid #BDBDBD;
+    position: absolute;
+    right: 40px;
+    transform: rotate(45deg);
+    top: 50px;
+}
 .main__step{
     font-family: 'Formular';
     font-style: normal;
