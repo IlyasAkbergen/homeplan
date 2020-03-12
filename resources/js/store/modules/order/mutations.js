@@ -36,5 +36,9 @@ export default {
         } else {
             state.customRoomTypes.push(payload)
         }
+    },
+
+    setLoading (state, value) {
+        state.loading = value
     }
 }

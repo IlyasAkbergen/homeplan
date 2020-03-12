@@ -3,7 +3,7 @@
         <StepInfo step="1">
             Выберите ваш <span>ЖК</span>
         </StepInfo>
-        <section class="main">
+        <section class="main" v-show="!loading">
             <div class="container">
                 <div class="main__inner">
                     <div class="row justify-content-center">
@@ -88,6 +88,7 @@
                 </div>
             </div>
         </section>
+        <Loading v-show="loading" />
     </div>
 </template>
 
@@ -99,6 +100,7 @@
         components: {
             StepInfo: () => import('../components/StepInfo'),
             NextButton: () => import('../components/NextButton'),
+            Loading: () => import('../components/Loader'),
         },
         methods: {
             ...mapActions('stage', ['incrementStep']),
@@ -108,7 +110,7 @@
             },
         },
         computed: {
-            ...mapState(['allComplexes']),
+            ...mapState(['allComplexes', 'loading']),
             ...mapState('order', ['selectedComplexId', 'selectedRoomsCount', 'customComplex']),
             complex: {
                 get () {

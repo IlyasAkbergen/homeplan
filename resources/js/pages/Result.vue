@@ -1,30 +1,29 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div>
         <div v-show="resultIsReady">
-                <b-carousel
-                        id="carousel-1"
-                        v-model="slide"
-                        :interval="4000"
-                        background="#ababab"
-                        img-width="1366"
-                        img-height="180"
-                        style="text-shadow: 1px 1px 2px #333;"
-                        @sliding-start="onSlideStart"
-                        @sliding-end="onSlideEnd"
-                        touch
-                >
-                    <b-carousel-slide v-for="(room,index) in orderResult.rooms" :key="index">
-                        <template v-slot:img>
-                            <img
-                                    class="d-block img-fluid w-100 class-name"
-                                    width="1024"
-                                    height="180"
-                                    :src="room.images[0].path"
-                                    alt="image slot">
-                        </template>
-                    </b-carousel-slide>
-                </b-carousel>
-
+            <b-carousel
+                    id="carousel-1"
+                    v-model="slide"
+                    :interval="4000"
+                    background="#ababab"
+                    img-width="1366"
+                    img-height="180"
+                    style="text-shadow: 1px 1px 2px #333;"
+                    @sliding-start="onSlideStart"
+                    @sliding-end="onSlideEnd"
+                    touch
+            >
+                <b-carousel-slide v-for="(room,index) in orderResult.rooms" :key="index">
+                    <template v-slot:img>
+                        <img
+                                class="d-block img-fluid w-100 class-name"
+                                width="1024"
+                                height="180"
+                                :src="room.images[0].path"
+                                alt="image slot">
+                    </template>
+                </b-carousel-slide>
+            </b-carousel>
 
             <section class="result__content">
                 <div class="container-fluid">
@@ -87,7 +86,11 @@
                                                v-mask="`+7(###)-###-##-##`"
                                                required
                                         >
-                                        <button type="submit">оформить</button>
+                                        <button type="submit"
+                                                :class="`${loading ? 'disabled' : ''}`"
+                                                :disabled="loading">
+                                            оформить
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -96,7 +99,7 @@
                 </div>
             </section>
         </div>
-        <Loader v-show="!resultIsReady" />
+        <Loader v-show="!resultIsReady" text="Рассчитываем стоимость" />
         <b-modal ref="order-created-modal" hide-footer>
             <div class="d-block text-center">
                 <h3>Ваша заявка успешно создана!</h3>
@@ -142,6 +145,7 @@
             ...mapMutations('order', [
                 'setClientName',
                 'setPhone',
+                'setLoading'
             ]),
             submitForm () {
                 this.setOrderClientInfo({
@@ -150,6 +154,9 @@
                     clientPhone: this.clientphone,
                 }).then(() => {
                     this.$refs['order-created-modal'].show();
+                    this.setLoading(false)
+                }).catch(() => {
+                    this.setLoading(false)
                 });
             },
             hideModal(){
@@ -166,7 +173,8 @@
                 'selectedRooms',
                 'clientName',
                 'phone',
-                'customComplex'
+                'customComplex',
+                'loading',
             ]),
             clientname: {
                 get () {
@@ -190,6 +198,8 @@
                 selectedComplexId: this.selectedComplexId,
                 selectedLayoutId: this.selectedLayoutId,
                 selectedRooms: this.selectedRooms,
+                customAddress: this.customComplex.address,
+                customSpace: this.customComplex.space,
             }).then(() => {
                 this.resultIsReady = true;
             })

@@ -3,7 +3,8 @@
         <StepInfo step="2">
             Выберите <span>комнаты</span>
         </StepInfo>
-        <section class="layout">
+        <Loader v-show="loading" />
+        <section class="layout" v-show="!loading">
             <div class="container-fluid">
                 <div class="layout__inner row justify-content-between">
                     <BackButton prevPath="/" />
@@ -38,13 +39,14 @@
       StepInfo: () => import('../components/StepInfo'),
       BackButton: () => import('../components/BackButton'),
       NextButton: () => import('../components/NextButton'),
+      Loader: () => import('../components/Loader'),
     },
     methods: {
       ...mapActions(['getAllRoomTypes']),
       ...mapMutations('order', ['switchCustomRoomType'])
     },
     computed: {
-      ...mapState(['allRoomTypes']),
+      ...mapState(['allRoomTypes', 'loading']),
       ...mapState('order', ['customRoomTypes']),
       allowNext () {
         return this.customRoomTypes.length >= 2;

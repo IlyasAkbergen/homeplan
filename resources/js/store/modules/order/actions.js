@@ -8,10 +8,14 @@ export default {
                 return res
             })
     },
-    setOrderClientInfo ({ commit }, data) {
-        return axios.put(`/orders/${data.id}`, data)
+    async setOrderClientInfo ({ commit }, data) {
+        commit('setLoading', true);
+        let result = null;
+        await axios.put(`/orders/${data.id}`, data)
             .then((res) => {
-                return res
-            })
+                commit('setLoading', false);
+                result = res
+            });
+        return result;
     }
 }
