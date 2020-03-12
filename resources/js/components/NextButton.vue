@@ -3,13 +3,13 @@
         ? 'col main__save--button'
         : 'col-md-2 col-sm-12 nav__next--button'"
     >
-        <router-link
-            :to="nextPath"
-            :class="`next--button ${disabled ? 'disabled' : ''}`"
-            :event="!disabled ? 'click' : ''"
+        <a class="next--button"
+           :class="`next--button ${disabled ? 'disabled' : ''}`"
+           href="#"
+           @click="clickHandler()"
         >
             далее
-        </router-link>
+        </a>
     </div>
 </template>
 
@@ -26,10 +26,19 @@
             centered: {
                 type: Boolean,
                 default: false,
+            },
+            onClick: {
+                type: Function,
+                default: () => null
             }
         },
         methods: {
             ...mapActions('stage', ['incrementStep']),
+            clickHandler () {
+              this.incrementStep();
+              return this.onClick()
+                ? null : this.$router.push(this.nextPath);
+            }
         }
     }
 </script>

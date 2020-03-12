@@ -35,7 +35,7 @@
                                     <a href="#"
                                        v-for="(room, index) in orderResult.rooms"
                                        @click = "setSlide(index)"
-                                       :class="`result__content--link ${index===slide ? 'active':''}`"
+                                       :class="`result__content--link ${index === slide ? 'active':''}`"
                                     >{{ room.type.name }}</a>
                                 </div>
                                 <h1>В дизайн-проект входит:</h1>
@@ -53,8 +53,10 @@
                             </div>
                             <div class="result__content--cost">
                                 <h1>Стоимость дизайн-проекта</h1>
-                                <h2 v-if="orderResult.complex!=null">{{orderResult.complex.name}}</h2>
-                                <!--<h2 v-else>{{customComplex.address}}</h2>-->
+                                <h2 v-if="orderResult.complex !== null
+                                    && resultIsReady">
+                                    {{ orderResult.complex.name || '' }}
+                                </h2>
                                 <div class="row justify-content-between">
                                     <p class="content__cost__right">Разработка 3D визуализации</p>
                                     <p class="content__cost__left">от 20 000 тг.</p>
@@ -73,7 +75,7 @@
                                 </div>
                                 <div class="row justify-content-between">
                                     <h3>итого:</h3>
-                                    <h3>{{orderResult.price}}тг.</h3>
+                                    <h3>{{ orderResult.price }}тг.</h3>
                                 </div>
                                 <div class="result__content--input">
                                     <h4>Оформить заказ</h4>
@@ -132,7 +134,6 @@
             },
             setSlide(num){
                 this.slide = num;
-
             },
             ...mapActions('order', [
                 'getOrderResult',
@@ -142,8 +143,6 @@
                 'setClientName',
                 'setPhone',
             ]),
-            ...mapState('selectedComplex'),
-            ...mapState('order', ['customComplex']),
             submitForm () {
                 this.setOrderClientInfo({
                     id: this.orderResult.id,
@@ -160,12 +159,14 @@
             }
         },
         computed: {
-            ...mapState('order', ['orderResult',
+            ...mapState('order', [
+                'orderResult',
                 'selectedComplexId',
                 'selectedLayoutId',
                 'selectedRooms',
                 'clientName',
-                'phone'
+                'phone',
+                'customComplex'
             ]),
             clientname: {
                 get () {
@@ -183,12 +184,6 @@
                     this.setPhone(value);
                 }
             },
-            customComplex:{
-                get(){
-                    return this.customComplex;
-                }
-
-            }
         },
         created(){
             this.getOrderResult({

@@ -1,12 +1,14 @@
 <template>
     <div>
-        <StepInfo step="3">
-            Выберите стиль для комнаты: <span>{{ selectedRoomType ? selectedRoomType.name : '' }}</span>
-        </StepInfo>
+        <transition name="fade" mode="out-in">
+            <StepInfo step="3">
+                Выберите стиль для комнаты: <span>{{ selectedRoomType ? selectedRoomType.name : '' }}</span>
+            </StepInfo>
+        </transition>
         <section class="rooms">
             <div class="container-fluid">
                 <div class="rooms__inner row align-items-center justify-content-between">
-                    <BackButton :prevPath="`${selectedComplexId === 'none' ? '/custom-room-types' : '/layouts'}`" />
+                    <BackButton :onClick="backClicked" />
                     <div class="col-md-8">
                         <div class="row justify-content-around">
                             <div class="col-xl" v-for="(roomType, index) in selectedRoomTypes">
@@ -22,10 +24,7 @@
                             </div>
                         </div>
                     </div>
-                    <NextButton
-                        nextPath="/result"
-                        :disabled="!allowNext"
-                    />
+                    <NextButton :onClick="nextClicked" :disabled="!allowNext" />
                 </div>
                 <div class="rooms__message">
                     <h1>Выберите понравившийся интерьер</h1>
@@ -68,8 +67,17 @@
             ...mapState('order', ['selectedRooms', 'selectedComplexId']),
             ...mapGetters(['selectedRoomTypes']),
             allowNext () {
-                return this.selectedRoomTypes
+                return this.isLastRoomType
+                  ? this.selectedRoomTypes
                     && this.selectedRoomTypes.length === Object.keys(this.selectedRooms).length
+                  : this.allowNextRoomTypeSelection;
+            },
+            allowNextRoomTypeSelection () {
+                return this.selectedRoomTypeIndex < this.selectedRoomTypes.length
+                    && this.currentRoomTypeStyleSelected;
+            },
+            currentRoomTypeStyleSelected () {
+                return this.currentSelectedRoomId !== null;
             },
             selectedRoomType () {
                 return this.selectedRoomTypes
@@ -80,14 +88,41 @@
                 return this.selectedRoomType ? this.selectedRoomType.rooms : []
             },
             currentSelectedRoomId () {
-                return this.selectedRooms[this.selectedRoomType.pivot_id] ?? {}
+                return this.selectedRooms[this.selectedRoomType.pivot_id] ?? null
             },
+            prevPath () {
+                return this.selectedComplexId === 'none'
+                  ? '/custom-room-types' : '/layouts';
+            },
+            nextPath () {
+                return '/result';
+            },
+            isLastRoomType () {
+                return this.selectedRoomTypeIndex === this.selectedRoomTypes.length - 1
+            },
+            isFirstRoomType () {
+                return this.selectedRoomTypeIndex === 0;
+            }
         },
         methods: {
             setSelectedRoomTypeIndex (value) {
                 this.selectedRoomTypeIndex = value
             },
             ...mapMutations('order', ['setSelectedRoom']),
+            backClicked () {
+              if (!this.isFirstRoomType) {
+                return this.selectedRoomTypeIndex = this.selectedRoomTypeIndex - 1;
+              } else {
+                return this.$router.push(this.prevPath);
+              }
+            },
+            nextClicked () {
+              if ( !this.isLastRoomType ) {
+                return this.selectedRoomTypeIndex = this.selectedRoomTypeIndex + 1;
+              } else {
+                return this.$router.push(this.nextPath);
+              }
+            }
         },
     }
 </script>

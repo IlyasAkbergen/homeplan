@@ -8,7 +8,7 @@
                 <div class="main__inner">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8 col-md-10">
-                            <select class="main__select" v-model="complex" @change = changeComplex()>
+                            <select class="main__select" v-model="complex">
                                 <option :value="null">выбрать ЖК</option>
                                 <option v-for="complex in allComplexes"
                                         :value="complex.id"
@@ -17,17 +17,32 @@
                             </select>
                         </div>
                     </div>
-                    <div v-if="!custom && this.selectedComplexId!=='none'">
+                    <div v-show="this.selectedComplexId !== 'none'">
                         <div class="row justify-content-center main__content" >
                             <div class="col-xl-2 col-lg-3 col-md-4">
                                 <h1 class="main__rooms">Количество комнат</h1>
                             </div>
                             <div class="col-xl-4 col-lg-5 col-md-6 main__content--buttons">
-                                <button :class="getClassOfRoomCount(1)" @click="setRoomsCount(1)">1</button>
-                                <button :class="getClassOfRoomCount(2)" @click="setRoomsCount(2)">2</button>
-                                <button :class="getClassOfRoomCount(3)" @click="setRoomsCount(3)">3</button>
-                                <button :class="getClassOfRoomCount(4)" @click="setRoomsCount(4)">4</button>
-                                <button :class="getClassOfRoomCount(5)" @click="setRoomsCount(5)">5+</button>
+                                <button :class="getClassOfRoomCount(1)"
+                                        @click="setRoomsCount(1)">
+                                    1
+                                </button>
+                                <button :class="getClassOfRoomCount(2)"
+                                        @click="setRoomsCount(2)">
+                                    2
+                                </button>
+                                <button :class="getClassOfRoomCount(3)"
+                                        @click="setRoomsCount(3)">
+                                    3
+                                </button>
+                                <button :class="getClassOfRoomCount(4)"
+                                        @click="setRoomsCount(4)">
+                                    4
+                                </button>
+                                <button :class="getClassOfRoomCount(5)"
+                                        @click="setRoomsCount(5)">
+                                    5+
+                                </button>
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -39,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div v-else>
+                    <div v-show="selectedComplexId === 'none'">
                         <div class="row justify-content-center">
                             <div class="col-xl-6 col-lg-8 col-md-10">
                                 <input type="text"
@@ -81,12 +96,6 @@
 
     export default {
         name: "FirstStep",
-        data(){
-            return{
-                custom:false
-            }
-
-        },
         components: {
             StepInfo: () => import('../components/StepInfo'),
             NextButton: () => import('../components/NextButton'),
@@ -97,18 +106,10 @@
             getClassOfRoomCount(count){
                 return `main__content--button ${count === this.selectedRoomsCount ? 'active' : ''}`;
             },
-            changeComplex(){
-                if (this.selectedComplexId==='none'){
-                    this.custom = true;
-                }else{
-                    this.custom = false;
-                }
-            }
         },
         computed: {
             ...mapState(['allComplexes']),
-            ...mapState('order', ['selectedComplexId', 'selectedRoomsCount']),
-            ...mapState('order', ['customComplex']),
+            ...mapState('order', ['selectedComplexId', 'selectedRoomsCount', 'customComplex']),
             complex: {
                 get () {
                     return this.selectedComplexId;
@@ -117,14 +118,13 @@
                     this.setSelectedComplex(value)
                 }
             },
-            allowNext() {
-                if(!this.custom){
-                    return this.selectedComplexId !== null && this.selectedComplexId !== 0 && this.selectedRoomsCount > 0;
-                }else{
-                    return this.customComplex.space && this.customComplex.space;
-                }
-
-            },
+          allowNext () {
+            if (this.selectedComplexId === 'none') {
+              return this.customComplex.space && this.customComplex.space;
+            } else {
+              return this.selectedComplexId != null && this.selectedRoomsCount > 0;
+            }
+          },
         }
     }
 </script>
