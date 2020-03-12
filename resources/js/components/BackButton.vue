@@ -1,6 +1,9 @@
 <template>
-    <div class="col-md-2 col-sm-12 nav__prev--button" @click="this.decrementStep">
-        <router-link :to="prevPath" class="prev--button">назад</router-link>
+    <div class="col-md-2 col-sm-12 nav__prev--button">
+        <a class="next--button"
+           href="#"
+           @click="clickHandler()"
+        >назад</a>
     </div>
 </template>
 
@@ -10,9 +13,18 @@
         name: "BackButton",
         props: {
             prevPath: String,
+            onClick: {
+                type: Function,
+                default: () => null
+            }
         },
         methods: {
             ...mapActions('stage', ['decrementStep']),
+            clickHandler () {
+                this.decrementStep();
+                return this.onClick()
+                  ? null : this.$router.push(this.prevPath);
+            }
         }
     }
 </script>

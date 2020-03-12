@@ -1,6 +1,6 @@
 <template>
     <div>
-        <StepInfo step="2">Какая у вас <span>планировка?</span></StepInfo>
+        <StepInfo step="2">Какая у Вас <span>планировка?</span></StepInfo>
         <section class="layout">
             <div class="container-fluid">
                 <div class="layout__inner row justify-content-between">

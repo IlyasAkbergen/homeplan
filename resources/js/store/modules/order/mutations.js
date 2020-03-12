@@ -7,10 +7,6 @@ export default {
       state.selectedComplexId = value
     },
 
-    setSelectedCustomComplex(state,value){
-        state.customComplex=value;
-    },
-
     setSelectedLayoutId(state, value) {
         state.selectedLayoutId = value
     },
@@ -30,16 +26,19 @@ export default {
     setPhone(state, value) {
         state.phone = value;
     },
-    setCustomComplex(state,value){
-        state.customComplex = value;
-    },
 
     switchCustomRoomType(state, payload ) {
-        if (state.customRoomTypes.some((roomType) => roomType.id === payload.id)) {
+        if (state.customRoomTypes
+          .some((roomType) => roomType.id === payload.id))
+        {
             state.customRoomTypes = state.customRoomTypes
               .filter((item) => item.id !== payload.id)
         } else {
             state.customRoomTypes.push(payload)
         }
+    },
+
+    setLoading (state, value) {
+        state.loading = value
     }
 }

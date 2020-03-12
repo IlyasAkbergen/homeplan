@@ -11,14 +11,24 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
-        $input = $request->only(['selectedComplexId', 'selectedLayoutId', 'selectedRooms']);
+        $input = $request->only([
+            'selectedComplexId',
+            'selectedLayoutId',
+            'selectedRooms',
+            'customAddress',
+            'customSpace'
+        ]);
 
         $order = Order::create([
-            'apartment_complex_id' => $input['selectedComplexId'] !== 'none' ? :0,
-            'layout_id' => isset($input['selectedLayoutId']) ? :0,
+            'apartment_complex_id' => $input['selectedComplexId'] !== 'none'
+                ? $input['selectedComplexId'] : 0,
+            'layout_id' => isset($input['selectedLayoutId'])
+                ? $input['selectedLayoutId'] : 0,
             'client_name' => 'temp',
             'email' => 'temp',
             'phone' => '',
+            'custom_address' => isset($input['customAddress']) ? $input['customAddress'] : null,
+            'custom_space' => isset($input['customSpace']) ? $input['customSpace'] : null,
         ]);
 
         $order->rooms()->attach(
@@ -54,13 +64,12 @@ class OrderController extends Controller
 
         $token = env("TELEGRAM_BOT_TOKEN");
         $chat_id = env("TELEGRAM_CHAT_ID");
-        $complex = "";
-        $layout = "";
+
         if(isset($order->apartmentComplex)){
             $complex = $order->apartmentComplex->name." | ".$order->apartmentComplex->address;
             $layout = $order->layout->space."м2 комнаты: ".$order->layout->rooms_count;
         }else{
-            $complex = "НЕТ ДАННЫХ";
+            $complex = $order->custom_address . ', ' . $order->custom_space . 'м2, комнаты: ' . $order->rooms->count();
             $layout = "НЕТ ДАННЫХ";
         }
 

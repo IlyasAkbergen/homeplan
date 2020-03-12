@@ -8,4 +8,5 @@ export default {
     phone: '',
     customComplex: {},
     customRoomTypes: [],
+    loading: false,
 }
