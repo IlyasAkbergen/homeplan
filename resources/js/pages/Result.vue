@@ -53,7 +53,8 @@
                             </div>
                             <div class="result__content--cost">
                                 <h1>Стоимость дизайн-проекта</h1>
-                                <h2>ЖК “Достык”, 68 кв.м.</h2>
+                                <h2 v-if="orderResult.complex!=null">{{orderResult.complex.name}}</h2>
+                                <!--<h2 v-else>{{customComplex.address}}</h2>-->
                                 <div class="row justify-content-between">
                                     <p class="content__cost__right">Разработка 3D визуализации</p>
                                     <p class="content__cost__left">от 20 000 тг.</p>
@@ -141,6 +142,8 @@
                 'setClientName',
                 'setPhone',
             ]),
+            ...mapState('selectedComplex'),
+            ...mapState('order', ['customComplex']),
             submitForm () {
                 this.setOrderClientInfo({
                     id: this.orderResult.id,
@@ -179,6 +182,12 @@
                 set (value) {
                     this.setPhone(value);
                 }
+            },
+            customComplex:{
+                get(){
+                    return this.customComplex;
+                }
+
             }
         },
         created(){

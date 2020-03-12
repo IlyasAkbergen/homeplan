@@ -7,6 +7,10 @@ export default {
       state.selectedComplexId = value
     },
 
+    setSelectedCustomComplex(state,value){
+        state.customComplex=value;
+    },
+
     setSelectedLayoutId(state, value) {
         state.selectedLayoutId = value
     },
@@ -25,6 +29,9 @@ export default {
 
     setPhone(state, value) {
         state.phone = value;
+    },
+    setCustomComplex(state,value){
+        state.customComplex = value;
     },
 
     switchCustomRoomType(state, payload ) {
