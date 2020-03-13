@@ -41,7 +41,10 @@
     text-decoration: none;
     color: #FFFFFF;
 }
-
+.rooms__button__group{
+    display: flex;
+    justify-content: space-around;
+}
 .room--button{
     display: flex;
     align-items: center;
@@ -56,6 +59,11 @@
     min-width: 130px;
     height: 40px;
 }
+.room--button.done{
+    background-color: #34C759;
+    color: #FFFFFF;
+    border: none;
+}
 .room--button.active{
     background-color: #FF5722;
     color: #FFFFFF;
@@ -65,6 +73,10 @@
     text-decoration: none;
     color: #FFAB91;
 }
+.room--button.done:hover{
+    text-decoration: none;
+    color: rgb(235, 235, 235);
+}
 
 @media(max-width: 1199px){
     .room--button{
@@ -73,20 +85,20 @@
 }
 
 @media(max-width: 767px){
+    .rooms__button__group{
+        justify-content: start;
+    }
     .nav__prev--button{
-        justify-content: center;
-        margin-bottom: 40px;
+        display: none;
     }
     .nav__next--button{
-        justify-content: center;
-        margin-bottom: 40px;
+        display: none;
     }
     .rooms--button-group{
         margin-bottom: 20px;
+        /* display: flex; */
     }
-}
-
-.disabled {
-    pointer-events: none;
-    opacity: 0.4;
+    .room--button{
+        min-width: 100px;
+    }
 }
