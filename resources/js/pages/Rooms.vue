@@ -39,10 +39,10 @@
                          v-for="(room, key) in rooms"
                          :key="room.id"
                     >
-                        <div class="card rooms--card">
+                        <div class="card rooms--card active">
                             <div class="rooms__card-image">
                                 <img :src="room.images[0].path" class="card-img-top zoom">
-                                <div class="rooms__card--image__wrapper">
+                                <div :class="`rooms__card--image__wrapper ${ currentSelectedRoomId === room.id ? 'active' : '' }`">
                                     <a href="#" class="room__zoom" @click="openZoom(key)">
                                         <img src="../../assets/img/zoom.png">
                                     </a>

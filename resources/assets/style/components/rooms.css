@@ -50,6 +50,15 @@
     opacity: 0;
     transition: 0.7s;
 }
+.rooms__card--image__wrapper.active{
+    opacity: 1;
+}
+.rooms__card--image__wrapper.active img{
+    opacity: 0;
+}
+.rooms__card--image__wrapper.active:hover img{
+    opacity: 1;
+}
 .rooms__card--image__wrapper img{
     width: 20px;
     height: 20px;
