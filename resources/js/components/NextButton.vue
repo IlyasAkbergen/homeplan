@@ -1,7 +1,7 @@
 <template>
     <div :class="centered
         ? 'col main__save--button'
-        : 'col-md-2 col-sm-12 nav__next--button'"
+        : 'col-md-2 nav__next--button'"
     >
         <a class="next--button"
            :class="`next--button ${disabled ? 'disabled' : ''}`"

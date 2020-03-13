@@ -1,6 +1,6 @@
 <template>
-    <div class="col-md-2 col-sm-12 nav__prev--button">
-        <a class="next--button"
+    <div class="col-md-2 nav__prev--button">
+        <a class="prev--button"
            href="#"
            @click="clickHandler()"
         >назад</a>

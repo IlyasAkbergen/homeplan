@@ -6,6 +6,7 @@
 @import url('components/rooms.css');
 @import url('components/result.css');
 @import url('./components/modal.css');
+@import url('./components/chooseroom.css');
 
 @font-face{
 	font-family: "Formular-medium";
@@ -67,7 +68,7 @@
 
 .circle-content {
 	font-family: Formular;
-	color: #333333;
+	color: #BDBDBD;
 	float: left;
 	font-size: 16px;
 	line-height: 20px;

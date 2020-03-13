@@ -4,14 +4,15 @@
             Выберите <span>комнаты</span>
         </StepInfo>
         <Loader v-show="loading" />
-        <section class="layout" v-show="!loading">
+        <section class="chooseroom" v-show="!loading">
             <div class="container-fluid">
-                <div class="layout__inner row justify-content-between">
+                <div class="chooseroom__inner row justify-content-between">
                     <BackButton prevPath="/" />
-                    <div class="col-md-8 mt-5">
+                    <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-3 mb-4" v-for="roomType in allRoomTypes">
-                                <div :class="`circle mx-auto ${customRoomTypes
+                            <div class="col-xl-3 col-lg-4 col-4 chooseroom__block"
+                                 v-for="roomType in allRoomTypes">
+                                <div :class="`circle mx-2 my-2 ${customRoomTypes
                                         .some((c) => c.id === roomType.id)
                                             ? 'circle-selected' : ''}`">
                                     <div class="circle-content clickable"
