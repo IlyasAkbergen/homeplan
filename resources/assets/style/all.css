@@ -5,6 +5,7 @@
 @import url('components/layout.css');
 @import url('components/rooms.css');
 @import url('components/result.css');
+@import url('./components/modal.css');
 
 @font-face{
 	font-family: "Formular-medium";
@@ -19,11 +20,6 @@
 	font-weight: normal;
 }
 
-.disabled {
-	pointer-events: none;
-	opacity: 0.4;
-}
-
 .underlined{
 	text-decoration: underline;
 }
@@ -32,3 +28,15 @@
 	text-decoration: underline;
 }
 
+.slide-fade-enter-active {
+	transition: all .2s ease;
+}
+
+.slide-fade-leave-active {
+	transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+	transform: translateX(10px);
+	opacity: 0;
+}

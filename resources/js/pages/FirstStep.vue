@@ -17,8 +17,12 @@
                             </select>
                         </div>
                     </div>
-                    <div v-show="this.selectedComplexId !== 'none'">
-                        <div class="row justify-content-center main__content" >
+
+                    <transition name="fade" mode="out-in">
+                        <div v-if="this.selectedComplexId !== 'none'"
+                             class="row justify-content-center main__content"
+                             key="roomsCount"
+                        >
                             <div class="col-xl-2 col-lg-3 col-md-4">
                                 <h1 class="main__rooms">Количество комнат</h1>
                             </div>
@@ -45,44 +49,38 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <NextButton
-                                    :nextPath="`${complex === 'none' ? '/custom-apartment' : '/layouts'}`"
-                                    centered
-                                    :disabled="!allowNext"
-                            />
-                        </div>
-                    </div>
 
-                    <div v-show="selectedComplexId === 'none'">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-6 col-lg-8 col-md-10">
-                                <input type="text"
-                                       name="address"
-                                       class="form-control main__select"
-                                       placeholder="Введите адресс"
-                                       v-model="customComplex.address"
-                                >
+                        <div v-if="selectedComplexId === 'none'" key="customComplex">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-6 col-lg-8 col-md-10">
+                                    <input type="text"
+                                           name="address"
+                                           class="form-control main__select"
+                                           placeholder="Введите адресс"
+                                           v-model="customComplex.address"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-xl-6 col-lg-8 col-md-10">
+                                    <input type="number"
+                                           value="0"
+                                           name="area"
+                                           class="form-control main__select"
+                                           placeholder="Введите площадь"
+                                           v-model="customComplex.space"
+                                    >
+                                </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-xl-6 col-lg-8 col-md-10">
-                                <input type="number"
-                                       value="0"
-                                       name="area"
-                                       class="form-control main__select"
-                                       placeholder="Введите площадь"
-                                       v-model="customComplex.space"
-                                >
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <NextButton
-                                    nextPath="/custom-room-types"
-                                    centered
-                                    :disabled="!allowNext"
-                            />
-                        </div>
+                    </transition>
+
+                    <div class="row justify-content-center">
+                        <NextButton
+                                :nextPath="`${complex === 'none' ? '/custom-room-types' : '/layouts'}`"
+                                centered
+                                :disabled="!allowNext"
+                        />
                     </div>
 
                 </div>
@@ -131,6 +129,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>
