@@ -102,7 +102,7 @@
         },
         methods: {
             ...mapActions('stage', ['incrementStep']),
-            ...mapMutations('order', ['setRoomsCount', 'setSelectedComplex']),
+            ...mapMutations('order', ['setRoomsCount', 'setSelectedComplex', 'setSelectedRooms']),
             getClassOfRoomCount(count){
                 return `main__content--button ${count === this.selectedRoomsCount ? 'active' : ''}`;
             },
@@ -125,6 +125,9 @@
               return this.selectedComplexId != null && this.selectedRoomsCount > 0;
             }
           },
+        },
+        created() {
+          this.setSelectedRooms({})
         }
     }
 </script>

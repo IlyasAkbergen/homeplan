@@ -7,6 +7,7 @@
 @import url('components/result.css');
 @import url('./components/modal.css');
 @import url('./components/chooseroom.css');
+@import url('./components/checkout.css');
 
 @font-face{
 	font-family: "Formular-medium";

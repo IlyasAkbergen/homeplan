@@ -155,7 +155,7 @@
                     clientName: this.clientname,
                     clientPhone: this.clientphone,
                 }).then(() => {
-                    this.$refs['order-created-modal'].show();
+                    this.$router.push('/success-order');
                     this.setLoading(false)
                 }).catch(() => {
                     this.setLoading(false)

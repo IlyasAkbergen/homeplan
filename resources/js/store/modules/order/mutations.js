@@ -20,6 +20,10 @@ export default {
         }
     },
 
+    setSelectedRooms(state, value) {
+        state.selectedRooms = value
+    },
+
     setOrderResult(state, value) {
         state.orderResult = value
     },
