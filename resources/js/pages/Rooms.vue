@@ -42,14 +42,14 @@
                         <div class="card rooms--card">
                             <div class="rooms__card-image">
                                 <img :src="room.images[0].path" class="card-img-top zoom">
-                                <div class="rooms__card--image__wrapper">
+                                <div :class="`rooms__card--image__wrapper ${ currentSelectedRoomId === room.id ? 'active' : '' }`">
                                     <a href="#" class="room__zoom" @click="openZoom(key)">
                                         <img src="../../assets/img/zoom.png">
                                     </a>
                                     <div
                                          :class="`rooms__card--image__layer ${ currentSelectedRoomId === room.id ? 'active' : '' }`"
                                     >
-                                        <a href=# @click="setSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })">
+                                        <a href=# @click="switchSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })">
                                             {{ currentSelectedRoomId === room.id ? 'Выбрано' : 'Выбрать' }}
                                         </a>
                                     </div>
@@ -79,7 +79,7 @@
                          class="nexticon"
                          @click="prevZoom()"
                     >
-                    <button @click="setSelectedRoom({ value: zoomedRoom.id, roomTypePivotId: selectedRoomType.pivot_id })">
+                    <button @click="switchSelectedRoom({ value: zoomedRoom.id, roomTypePivotId: selectedRoomType.pivot_id })">
                         Выбрать
                     </button>
                 </div>
@@ -151,7 +151,7 @@
             setSelectedRoomTypeIndex (value) {
                 this.selectedRoomTypeIndex = value
             },
-            ...mapMutations('order', ['setSelectedRoom']),
+            ...mapMutations('order', ['switchSelectedRoom']),
             backClicked () {
               if (!this.isFirstRoomType) {
                 return this.selectedRoomTypeIndex = this.selectedRoomTypeIndex - 1;

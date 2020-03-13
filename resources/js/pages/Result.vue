@@ -9,6 +9,7 @@
                     img-width="1366"
                     img-height="180"
                     style="text-shadow: 1px 1px 2px #333;"
+                    controls
                     @sliding-start="onSlideStart"
                     @sliding-end="onSlideEnd"
                     touch
@@ -34,7 +35,8 @@
                                     <a href="#"
                                        v-for="(room, index) in orderResult.rooms"
                                        @click = "setSlide(index)"
-                                       :class="`result__content--link ${index === slide ? 'active':''}`"
+                                       :class="`result__content--link  ${index === slide ? 'active':''}`"
+                                       style="z-index: 100"
                                     >{{ room.type.name }}</a>
                                 </div>
                                 <h1>В дизайн-проект входит:</h1>
@@ -218,8 +220,7 @@
         /*width: 100%;*/
         min-height: 40vh;
         /*object-fit: cover;*/
-        max-height:600px;
-
+        max-height:700px;
     }
 </style>
 

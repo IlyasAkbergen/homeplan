@@ -11,8 +11,13 @@ export default {
         state.selectedLayoutId = value
     },
 
-    setSelectedRoom(state, {value, roomTypePivotId}) {
-        state.selectedRooms = {...state.selectedRooms, ...{ [roomTypePivotId]: value }};
+    switchSelectedRoom(state, {value, roomTypePivotId}) {
+        if (state.selectedRooms[roomTypePivotId] && state.selectedRooms[roomTypePivotId] === value) {
+            const { [roomTypePivotId]: omit, ...newObject } = state.selectedRooms;
+            state.selectedRooms = newObject;
+        } else {
+            state.selectedRooms = {...state.selectedRooms, ...{ [roomTypePivotId]: value }};
+        }
     },
 
     setOrderResult(state, value) {

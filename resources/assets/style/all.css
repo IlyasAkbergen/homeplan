@@ -40,3 +40,44 @@
 	transform: translateX(10px);
 	opacity: 0;
 }
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+.clickable{
+	cursor: pointer;
+}
+
+.circle {
+	background: #F2F2F2;
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+}
+
+.circle-selected {
+	background: #ffeeee;
+}
+
+.circle:hover {
+	background: #ffeeee;
+}
+
+.circle-content {
+	font-family: Formular;
+	color: #333333;
+	float: left;
+	font-size: 16px;
+	line-height: 20px;
+	margin-top: -0.5em;
+	padding-top: 37%;
+	text-align: center;
+	width: 100%;
+}
+
+.circle-content i{
+	font-size:30px;
+	margin-bottom: 10px;
+}
