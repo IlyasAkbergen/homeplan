@@ -21,6 +21,9 @@
 .title__name span{
     color: #FF5722;
 }
+.title__back{
+    display: none;
+}
 
 @media(max-width: 767px){
     .title__inner{
@@ -43,5 +46,16 @@
     }
     .title{
         padding-top: 0;
+    }
+    .title__back{
+        display: block;
+    }
+    .title__name-block{
+        display: flex;
+        align-items: center;
+    }
+    .title__back{
+        padding: 20px;
+        margin-bottom: 30px;
     }
 }

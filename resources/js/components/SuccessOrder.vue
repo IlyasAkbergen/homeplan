@@ -2,7 +2,7 @@
     <section class="checkout">
         <div class="container-fluid">
             <div class="checkout__inner">
-                <dic class="row justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-sm-6">
                         <div class="checkout__box">
                             <div class="checkout--img">
@@ -15,7 +15,7 @@
                             через {{ countDown }} секунд ...
                         </p>
                     </div>
-                </dic>
+                </div>
             </div>
         </div>
     </section>

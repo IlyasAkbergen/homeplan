@@ -1,6 +1,6 @@
 <template>
     <div>
-        <StepInfo step="1">
+        <StepInfo step="1" :goBack="() => $router.push('/')">
             Выберите ваш <span>ЖК</span>
         </StepInfo>
         <section class="main">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState, mapMutations } from 'vuex';
+    import { mapState } from 'vuex';
     export default {
         name: "CustomApartment",
         components: {

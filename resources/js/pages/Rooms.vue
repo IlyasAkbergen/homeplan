@@ -1,7 +1,7 @@
 <template>
     <div>
         <transition name="fade" mode="out-in">
-            <StepInfo step="3">
+            <StepInfo step="3" :goBack="backClicked">
                 Выберите стиль для комнаты: <span>{{ selectedRoomType ? selectedRoomType.name : '' }}</span>
             </StepInfo>
         </transition>

@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-2 nav__prev--button">
+    <div class="col-md-2 nav__prev--button justify-content-center">
         <a class="prev--button"
            href="#"
            @click="clickHandler()"
