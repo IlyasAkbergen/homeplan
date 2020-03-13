@@ -3,14 +3,16 @@
         <StepInfo step="2">
             Выберите <span>комнаты</span>
         </StepInfo>
-        <section class="layout">
+        <Loader v-show="loading" />
+        <section class="chooseroom" v-show="!loading">
             <div class="container-fluid">
-                <div class="layout__inner row justify-content-between">
-                    <BackButton prevPath="/custom-apartment" />
-                    <div class="col-md-8 mt-5">
+                <div class="chooseroom__inner row justify-content-between">
+                    <BackButton prevPath="/" />
+                    <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-3 mb-4"v-for="roomType in allRoomTypes">
-                                <div :class="`circle mx-auto ${customRoomTypes
+                            <div class="col-xl-3 col-lg-4 col-4 chooseroom__block"
+                                 v-for="roomType in allRoomTypes">
+                                <div :class="`circle mx-2 my-2 ${customRoomTypes
                                         .some((c) => c.id === roomType.id)
                                             ? 'circle-selected' : ''}`">
                                     <div class="circle-content clickable"
@@ -38,13 +40,14 @@
       StepInfo: () => import('../components/StepInfo'),
       BackButton: () => import('../components/BackButton'),
       NextButton: () => import('../components/NextButton'),
+      Loader: () => import('../components/Loader'),
     },
     methods: {
       ...mapActions(['getAllRoomTypes']),
       ...mapMutations('order', ['switchCustomRoomType'])
     },
     computed: {
-      ...mapState(['allRoomTypes']),
+      ...mapState(['allRoomTypes', 'loading']),
       ...mapState('order', ['customRoomTypes']),
       allowNext () {
         return this.customRoomTypes.length >= 2;

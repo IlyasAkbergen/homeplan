@@ -27,7 +27,7 @@ export default {
     selectedRoomTypes(state, getters, rootState) {
         return rootState.order.selectedComplexId === 'none'
           ? rootState.order.customRoomTypes.map((r) => ({ ...r, ...{pivot_id: r.id} }))
-          : getters.selectedLayout.roomTypes;
+          : getters.selectedLayout.roomTypes || {};
     }
 }
 

@@ -1,30 +1,30 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div>
         <div v-show="resultIsReady">
-                <b-carousel
-                        id="carousel-1"
-                        v-model="slide"
-                        :interval="4000"
-                        background="#ababab"
-                        img-width="1366"
-                        img-height="180"
-                        style="text-shadow: 1px 1px 2px #333;"
-                        @sliding-start="onSlideStart"
-                        @sliding-end="onSlideEnd"
-                        touch
-                >
-                    <b-carousel-slide v-for="(room,index) in orderResult.rooms" :key="index">
-                        <template v-slot:img>
-                            <img
-                                    class="d-block img-fluid w-100 class-name"
-                                    width="1024"
-                                    height="180"
-                                    :src="room.images[0].path"
-                                    alt="image slot">
-                        </template>
-                    </b-carousel-slide>
-                </b-carousel>
-
+            <b-carousel
+                    id="carousel-1"
+                    v-model="slide"
+                    :interval="4000"
+                    background="#ababab"
+                    img-width="1366"
+                    img-height="180"
+                    style="text-shadow: 1px 1px 2px #333;"
+                    controls
+                    @sliding-start="onSlideStart"
+                    @sliding-end="onSlideEnd"
+                    touch
+            >
+                <b-carousel-slide v-for="(room,index) in orderResult.rooms" :key="index">
+                    <template v-slot:img>
+                        <img
+                                class="d-block img-fluid w-100 class-name"
+                                width="1024"
+                                height="180"
+                                :src="room.images[0].path"
+                                alt="image slot">
+                    </template>
+                </b-carousel-slide>
+            </b-carousel>
 
             <section class="result__content">
                 <div class="container-fluid">
@@ -35,7 +35,8 @@
                                     <a href="#"
                                        v-for="(room, index) in orderResult.rooms"
                                        @click = "setSlide(index)"
-                                       :class="`result__content--link ${index===slide ? 'active':''}`"
+                                       :class="`result__content--link  ${index === slide ? 'active':''}`"
+                                       style="z-index: 100"
                                     >{{ room.type.name }}</a>
                                 </div>
                                 <h1>В дизайн-проект входит:</h1>
@@ -53,7 +54,10 @@
                             </div>
                             <div class="result__content--cost">
                                 <h1>Стоимость дизайн-проекта</h1>
-                                <h2>ЖК “Достык”, 68 кв.м.</h2>
+                                <h2 v-if="orderResult.complex !== null
+                                    && resultIsReady">
+                                    {{ orderResult.complex.name || '' }}
+                                </h2>
                                 <div class="row justify-content-between">
                                     <p class="content__cost__right">Разработка 3D визуализации</p>
                                     <p class="content__cost__left">от 20 000 тг.</p>
@@ -72,7 +76,7 @@
                                 </div>
                                 <div class="row justify-content-between">
                                     <h3>итого:</h3>
-                                    <h3>{{orderResult.price}}тг.</h3>
+                                    <h3>{{ orderResult.price }}тг.</h3>
                                 </div>
                                 <div class="result__content--input">
                                     <h4>Оформить заказ</h4>
@@ -84,7 +88,11 @@
                                                v-mask="`+7(###)-###-##-##`"
                                                required
                                         >
-                                        <button type="submit">оформить</button>
+                                        <button type="submit"
+                                                :class="`${loading ? 'disabled' : ''}`"
+                                                :disabled="loading">
+                                            оформить
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -93,7 +101,7 @@
                 </div>
             </section>
         </div>
-        <Loader v-show="!resultIsReady" />
+        <Loader v-show="!resultIsReady" text="Рассчитываем стоимость" />
         <b-modal ref="order-created-modal" hide-footer>
             <div class="d-block text-center">
                 <h3>Ваша заявка успешно создана!</h3>
@@ -131,7 +139,6 @@
             },
             setSlide(num){
                 this.slide = num;
-
             },
             ...mapActions('order', [
                 'getOrderResult',
@@ -140,6 +147,7 @@
             ...mapMutations('order', [
                 'setClientName',
                 'setPhone',
+                'setLoading'
             ]),
             submitForm () {
                 this.setOrderClientInfo({
@@ -147,7 +155,10 @@
                     clientName: this.clientname,
                     clientPhone: this.clientphone,
                 }).then(() => {
-                    this.$refs['order-created-modal'].show();
+                    this.$router.push('/success-order');
+                    this.setLoading(false)
+                }).catch(() => {
+                    this.setLoading(false)
                 });
             },
             hideModal(){
@@ -157,12 +168,15 @@
             }
         },
         computed: {
-            ...mapState('order', ['orderResult',
+            ...mapState('order', [
+                'orderResult',
                 'selectedComplexId',
                 'selectedLayoutId',
                 'selectedRooms',
                 'clientName',
-                'phone'
+                'phone',
+                'customComplex',
+                'loading',
             ]),
             clientname: {
                 get () {
@@ -179,13 +193,15 @@
                 set (value) {
                     this.setPhone(value);
                 }
-            }
+            },
         },
         created(){
             this.getOrderResult({
                 selectedComplexId: this.selectedComplexId,
                 selectedLayoutId: this.selectedLayoutId,
                 selectedRooms: this.selectedRooms,
+                customAddress: this.customComplex.address,
+                customSpace: this.customComplex.space,
             }).then(() => {
                 this.resultIsReady = true;
             })
@@ -204,8 +220,7 @@
         /*width: 100%;*/
         min-height: 40vh;
         /*object-fit: cover;*/
-        max-height:600px;
-
+        max-height:700px;
     }
 </style>
 

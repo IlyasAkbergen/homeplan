@@ -5,6 +5,9 @@
 @import url('components/layout.css');
 @import url('components/rooms.css');
 @import url('components/result.css');
+@import url('./components/modal.css');
+@import url('./components/chooseroom.css');
+@import url('./components/checkout.css');
 
 @font-face{
 	font-family: "Formular-medium";
@@ -19,11 +22,6 @@
 	font-weight: normal;
 }
 
-.disabledbutton {
-	pointer-events: none;
-	opacity: 0.4;
-}
-
 .underlined{
 	text-decoration: underline;
 }
@@ -32,3 +30,56 @@
 	text-decoration: underline;
 }
 
+.slide-fade-enter-active {
+	transition: all .2s ease;
+}
+
+.slide-fade-leave-active {
+	transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+	transform: translateX(10px);
+	opacity: 0;
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+.clickable{
+	cursor: pointer;
+}
+
+.circle {
+	background: #F2F2F2;
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+}
+
+.circle-selected {
+	background: #ffeeee;
+}
+
+.circle:hover {
+	background: #ffeeee;
+}
+
+.circle-content {
+	font-family: Formular;
+	color: #BDBDBD;
+	float: left;
+	font-size: 16px;
+	line-height: 20px;
+	margin-top: -0.5em;
+	padding-top: 37%;
+	text-align: center;
+	width: 100%;
+}
+
+.circle-content i{
+	font-size:30px;
+	margin-bottom: 10px;
+}

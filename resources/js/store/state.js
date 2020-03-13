@@ -3,4 +3,5 @@
 export default {
     allComplexes: [],
     allRoomTypes:[],
+    loading: false,
 }

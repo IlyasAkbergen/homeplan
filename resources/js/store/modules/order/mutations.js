@@ -11,8 +11,17 @@ export default {
         state.selectedLayoutId = value
     },
 
-    setSelectedRoom(state, {value, roomTypePivotId}) {
-        state.selectedRooms = {...state.selectedRooms, ...{ [roomTypePivotId]: value }};
+    switchSelectedRoom(state, {value, roomTypePivotId}) {
+        if (state.selectedRooms[roomTypePivotId] && state.selectedRooms[roomTypePivotId] === value) {
+            const { [roomTypePivotId]: omit, ...newObject } = state.selectedRooms;
+            state.selectedRooms = newObject;
+        } else {
+            state.selectedRooms = {...state.selectedRooms, ...{ [roomTypePivotId]: value }};
+        }
+    },
+
+    setSelectedRooms(state, value) {
+        state.selectedRooms = value
     },
 
     setOrderResult(state, value) {
@@ -28,11 +37,17 @@ export default {
     },
 
     switchCustomRoomType(state, payload ) {
-        if (state.customRoomTypes.some((roomType) => roomType.id === payload.id)) {
+        if (state.customRoomTypes
+          .some((roomType) => roomType.id === payload.id))
+        {
             state.customRoomTypes = state.customRoomTypes
               .filter((item) => item.id !== payload.id)
         } else {
             state.customRoomTypes.push(payload)
         }
+    },
+
+    setLoading (state, value) {
+        state.loading = value
     }
 }

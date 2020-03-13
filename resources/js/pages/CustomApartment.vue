@@ -18,7 +18,8 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8 col-md-10">
-                            <input type="text"
+                            <input type="number"
+                                   value="0"
                                    name="area"
                                    class="form-control main__select"
                                    placeholder="Введите площадь"
