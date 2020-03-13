@@ -1,6 +1,6 @@
 <template>
     <div>
-        <StepInfo step="2">Какая у Вас <span>планировка?</span></StepInfo>
+        <StepInfo step="2" :goBack="() => $router.push('/')">Какая у Вас <span>планировка?</span></StepInfo>
         <section class="layout">
             <div class="container-fluid">
                 <div class="layout__inner row justify-content-between">
@@ -9,12 +9,12 @@
                         <div class="row">
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" v-for="layout in layouts">
                                 <div
-                                    :class="`card layout__card ${
+                                    :class="`card layout__card clickable ${
                                         layout.id === selectedLayoutId ? 'layout__active' : ''
                                     }`"
                                     @click="setSelectedLayoutId(layout.id)"
                                 >
-                                    <div class="layout__card-image">
+                                    <div :class="`layout__card-image ${layout.id === selectedLayoutId ? 'layout__mobile_active' : ''}`">
                                         <img :src="layout.images[0].path" class="card-img-top" alt="...">
                                     </div>
                                     <div class="card-body">

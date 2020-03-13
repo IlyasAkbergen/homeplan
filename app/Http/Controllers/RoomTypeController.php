@@ -11,7 +11,9 @@ class RoomTypeController extends Controller
     public function getAll(){
         return $this->responseSuccess(
             RoomTypeResource::collection(
-                RoomType::with(['rooms', 'rooms.images'])->get()
+                RoomType::with(['rooms', 'rooms.images'])
+                    ->where('deleted', 0)
+                    ->get()
             )
         );
     }

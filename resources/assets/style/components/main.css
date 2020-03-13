@@ -63,8 +63,8 @@
     border: none;
 }
 .main__content--button:focus{
-        outline: 0;
-        outline: none;
+    outline: 0;
+    outline: none;
 }
 .main__content--button.active{
     background-color: #FF5722;
@@ -88,8 +88,8 @@
     border-radius: 5px;
 }
 .main__save--button a:hover{
-  text-decoration: none;
-  color:#FFFFFF
+    text-decoration: none;
+    color:#FFFFFF
 }
 
 @media(max-width: 767px){

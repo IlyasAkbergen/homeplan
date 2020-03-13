@@ -14,28 +14,24 @@ class RoomTypesSeeder extends Seeder
     {
         $room_types = [
             [
-                'name' => 'Кухня',
-                'icon' => 'coffee',
-            ],
-            [
-                'name' => 'Зал',
+                'name' => 'Гостиная',
                 'icon' => 'couch',
             ],
             [
-                'name' => 'Гостиная',
-                'icon' => 'door-open',
+                'name' => 'Кухня',
+                'icon' => 'coffee',
             ],
             [
                 'name' => 'Спальня',
                 'icon' => 'bed',
             ],
             [
-                'name' => 'Санузел',
-                'icon' => 'bath'
+                'name' => 'Детская',
+                'icon' => 'baby',
             ],
             [
-                'name' => 'Балкон',
-                'icon' => 'city'
+                'name' => 'Санузел',
+                'icon' => 'bath'
             ],
             [
                 'name' => 'Прихожая',

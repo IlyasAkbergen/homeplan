@@ -1,6 +1,6 @@
 <template>
     <div>
-        <StepInfo step="2">
+        <StepInfo step="2" :goBack="() => $router.push('/')">
             Выберите <span>комнаты</span>
         </StepInfo>
         <Loader v-show="loading" />
