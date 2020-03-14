@@ -4,7 +4,6 @@
             <b-carousel
                     id="carousel-1"
                     v-model="slide"
-                    :interval="4000"
                     background="#ababab"
                     img-width="1366"
                     img-height="180"
@@ -17,7 +16,7 @@
                 <b-carousel-slide v-for="(room,index) in orderResult.rooms" :key="index">
                     <template v-slot:img>
                         <img
-                                class="d-block img-fluid w-100 class-name"
+                                class="d-block img-fluid w-100 class-name result"
                                 width="1024"
                                 height="180"
                                 :src="room.images[0].path"
@@ -27,6 +26,19 @@
             </b-carousel>
 
             <section class="result__content">
+                <div class="result__navbar">
+                    <!--<a href="#" class="result__content&#45;&#45;link mobile ">Гостиная</a>-->
+                    <!--<a href="#" class="result__content&#45;&#45;link mobile">Кухня</a>-->
+                    <!--<a href="#" class="result__content&#45;&#45;link mobile">Спальня</a>-->
+                    <!--<a href="#" class="result__content&#45;&#45;link mobile">Санузел</a>-->
+                    <!--<a href="#" class="result__content&#45;&#45;link mobile active">Детская</a>-->
+                    <a href="#"
+                       v-for="(room, index) in orderResult.rooms"
+                       @click = "setSlide(index)"
+                       :class="`result__content--link mobile ${index === slide ? 'active':''}`"
+                       style="z-index: 100"
+                    >{{ room.type.name }}</a>
+                </div>
                 <div class="container-fluid">
                     <div class="result__content__inner">
                         <div class="row justify-content-between result__content--blocks">
@@ -52,7 +64,7 @@
                                 <p>10. Смета на ремонт и материал</p>
 
                             </div>
-                            <div class="result__content--cost">
+                            <div class="result__content--cost" id = "form-submit">
                                 <h1>Стоимость дизайн-проекта</h1>
                                 <h2 v-if="orderResult.complex !== null
                                     && resultIsReady">
@@ -78,7 +90,7 @@
                                     <h3>итого:</h3>
                                     <h3>{{ orderResult.price }}тг.</h3>
                                 </div>
-                                <div class="result__content--input">
+                                <div class="result__content--input" >
                                     <h4>Оформить заказ</h4>
                                     <form @submit.prevent="submitForm">
                                         <input type="text" placeholder="Имя" v-model="clientname" required>
@@ -100,6 +112,14 @@
                     </div>
                 </div>
             </section>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="footer__inner">
+                        <h1>{{ orderResult.price }}тг.</h1>
+                        <a href="#form-submit"> <button>оставить заявку</button></a>
+                    </div>
+                </div>
+            </footer>
         </div>
         <Loader v-show="!resultIsReady" text="Рассчитываем стоимость" />
         <b-modal ref="order-created-modal" hide-footer>
@@ -219,7 +239,7 @@
         max-width:100%;
         /*width: 100%;*/
         min-height: 40vh;
-        /*object-fit: cover;*/
+        object-fit: cover;
         max-height:700px;
     }
 </style>

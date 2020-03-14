@@ -82,6 +82,8 @@
     font-size: 14px;
     line-height: 17px;
 }
+
+
 .rooms__card--image__layer.active a{
     background-color:#34C759;
 }
