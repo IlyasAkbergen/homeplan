@@ -7,7 +7,7 @@
                     <BackButton prevPath="/" />
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" v-for="layout in layouts">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-6" v-for="layout in layouts">
                                 <div
                                     :class="`card layout__card clickable ${
                                         layout.id === selectedLayoutId ? 'layout__active' : ''
@@ -18,7 +18,7 @@
                                         <img :src="layout.images[0].path" class="card-img-top" alt="...">
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text">42 м2</p>
+                                        <p class="card-text">{{layout.space}} м2</p>
                                     </div>
                                 </div>
                             </div>

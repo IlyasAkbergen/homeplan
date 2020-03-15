@@ -14,7 +14,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="mb-5">
     <div id="app">
         <app />
     </div>

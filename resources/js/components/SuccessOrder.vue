@@ -11,7 +11,8 @@
                             <h1>Ваша заявка принята</h1>
                         </div>
                         <p>сейчас Вы будете перенаправлены <br>
-                            <router-link to="/">на главную страницу</router-link>
+                            <!--<router-link to="/">на главную страницу</router-link>-->
+                            на главную страницу
                             через {{ countDown }} секунд ...
                         </p>
                     </div>
@@ -37,7 +38,9 @@
             if (this.countDown > 0){
               this.countDownTimer()
             } else {
-              this.$router.push('/');
+                location.reload();
+              // this.$router.push('/');
+
             }
           }, 1000)
         }
