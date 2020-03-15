@@ -92,7 +92,7 @@
         display: none;
     }
     .nav__next--button{
-        display: none;
+        justify-content: center;
     }
     .rooms--button-group{
         margin-bottom: 20px;
