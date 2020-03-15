@@ -10,7 +10,7 @@
                     <BackButton prevPath="/" />
                     <div class="col-md-8 mt-5">
                         <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4" v-for="roomType in allRoomTypes">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-6 mb-4" v-for="roomType in allRoomTypes">
                                 <div :class="`circle mx-auto ${customRoomTypes
                                         .some((c) => c.id === roomType.id)
                                             ? 'circle-selected' : ''}`">
