@@ -14,13 +14,13 @@
                             <div class="col-xl col-lg-3 col-md-4 col-4"
                                  v-for="(roomType, index) in selectedRoomTypes">
                                 <a
-                                        href="#"
-                                        :class="`room--button ${
+                                    href="#"
+                                    :class="`room--button ${
                                       selectedRoomType.pivot_id === roomType.pivot_id
                                         ? 'active' : ''}
                                       ${ selectedRooms[roomType.pivot_id] ? 'done' : ''}
                                     `"
-                                        @click="setSelectedRoomTypeIndex(index)"
+                                    @click.prevent="setSelectedRoomTypeIndex(index)"
                                 >
                                     {{ roomType.name }}
                                 </a>
@@ -49,8 +49,7 @@
                                     <div
                                             :class="`rooms__card--image__layer ${ currentSelectedRoomId === room.id ? 'active' : '' }`"
                                     >
-                                        <a href=#
-                                           @click="switchSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })">
+                                        <a href="" @click.prevent="switchSelectedRoom({ value: room.id, roomTypePivotId: selectedRoomType.pivot_id })">
                                             {{ currentSelectedRoomId === room.id ? 'Выбрано' : 'Выбрать' }}
                                         </a>
                                     </div>

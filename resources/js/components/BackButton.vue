@@ -2,7 +2,7 @@
     <div class="col-md-2 nav__prev--button">
         <a class="prev--button"
            href="#"
-           @click="clickHandler()"
+           @click.prevent="clickHandler()"
         >назад</a>
     </div>
 </template>

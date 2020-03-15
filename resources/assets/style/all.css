@@ -60,11 +60,7 @@
 }
 
 .circle-selected {
-	background: #ffeeee;
-}
-
-.circle:hover {
-	background: #ffeeee;
+	background: #ffeeee !important;
 }
 
 .circle-content {

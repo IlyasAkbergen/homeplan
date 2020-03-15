@@ -6,7 +6,7 @@
         <a class="next--button"
            :class="`next--button ${disabled ? 'disabled' : ''}`"
            href="#"
-           @click="clickHandler()"
+           @click.prevent="clickHandler()"
         >
             далее
         </a>

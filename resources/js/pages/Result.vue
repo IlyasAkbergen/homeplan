@@ -27,14 +27,9 @@
 
             <section class="result__content">
                 <div class="result__navbar">
-                    <!--<a href="#" class="result__content&#45;&#45;link mobile ">Гостиная</a>-->
-                    <!--<a href="#" class="result__content&#45;&#45;link mobile">Кухня</a>-->
-                    <!--<a href="#" class="result__content&#45;&#45;link mobile">Спальня</a>-->
-                    <!--<a href="#" class="result__content&#45;&#45;link mobile">Санузел</a>-->
-                    <!--<a href="#" class="result__content&#45;&#45;link mobile active">Детская</a>-->
                     <a href="#"
                        v-for="(room, index) in orderResult.rooms"
-                       @click = "setSlide(index)"
+                       @click.prevent="setSlide(index)"
                        :class="`result__content--link mobile ${index === slide ? 'active':''}`"
                        style="z-index: 100"
                     >{{ room.type.name }}</a>
@@ -46,7 +41,7 @@
                                 <div class="row">
                                     <a href="#"
                                        v-for="(room, index) in orderResult.rooms"
-                                       @click = "setSlide(index)"
+                                       @click.prevent="setSlide(index)"
                                        :class="`result__content--link  ${index === slide ? 'active':''}`"
                                        style="z-index: 100"
                                     >{{ room.type.name }}</a>
