@@ -64,11 +64,11 @@
                                 <p>10. Смета на ремонт и материал</p>
 
                             </div>
-                            <div class="result__content--cost" id = "form-submit">
+                            <div class="result__content--cost" >
                                 <h1>Стоимость дизайн-проекта</h1>
                                 <h2 v-if="orderResult.complex !== null
                                     && resultIsReady">
-                                    {{ orderResult.complex.name || '' }}
+                                        {{ orderResult.complex.name || '' }}
                                 </h2>
                                 <div class="row justify-content-between">
                                     <p class="content__cost__right">Разработка 3D визуализации</p>
@@ -90,7 +90,7 @@
                                     <h3>итого:</h3>
                                     <h3>{{ orderResult.price }}тг.</h3>
                                 </div>
-                                <div class="result__content--input" >
+                                <div class="result__content--input" id = "form-submit">
                                     <h4>Оформить заказ</h4>
                                     <form @submit.prevent="submitForm">
                                         <input type="text" placeholder="Имя" v-model="clientname" required>
@@ -240,7 +240,7 @@
         /*width: 100%;*/
         min-height: 40vh;
         object-fit: cover;
-        max-height:700px;
+        max-height:600px;
     }
 </style>
 
