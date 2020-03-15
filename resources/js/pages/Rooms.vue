@@ -29,7 +29,7 @@
                     </div>
                     <NextButton :onClick="nextClicked" :disabled="!allowNext"/>
                 </div>
-                <div class="rooms__message mt-3 mb-3">
+                <div class="rooms__message mt-3 mb-5">
                     <h1>Выберите понравившийся интерьер</h1>
                 </div>
             </div>
