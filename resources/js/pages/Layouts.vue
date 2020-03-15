@@ -12,7 +12,7 @@
                                     :class="`card layout__card clickable ${
                                         layout.id === selectedLayoutId ? 'layout__active' : ''
                                     }`"
-                                    @click="setSelectedLayoutId(layout.id)"
+                                    @click="layoutSelected(layout)"
                                 >
                                     <div :class="`layout__card-image ${layout.id === selectedLayoutId ? 'layout__mobile_active' : ''}`">
                                         <img :src="layout.images[0].path" class="card-img-top" alt="...">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                     </div>
-                    <NextButton nextPath="/rooms" :disabled="selectedLayoutId === null"/>
+                    <!--<NextButton nextPath="/rooms" :disabled="selectedLayoutId === null"/>-->
                 </div>
             </div>
         </section>
@@ -54,6 +54,10 @@
         },
         methods: {
             ...mapMutations('order', ['setSelectedLayoutId']),
+            layoutSelected (layout) {
+                this.setSelectedLayoutId(layout.id);
+                this.$router.push('/rooms');
+            }
         }
     }
 </script>
