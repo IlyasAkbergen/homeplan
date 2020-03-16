@@ -66,6 +66,9 @@
                                         && resultIsReady">
                                             {{ orderResult.complex.name || '' }}
                                     </h2>
+                                    <h2 v-else>
+                                        {{ this.customComplex.address || '' }}
+                                    </h2>
                                 </div>
                                 <div class="row justify-content-between">
                                     <p class="content__cost__right">Разработка 3D визуализации</p>
