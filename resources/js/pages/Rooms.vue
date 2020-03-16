@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="container-fluid rooms__container">
-                <div class="row">
+                <div class="row rooms__row">
                     <div class="col-xl-4 col-md-6 col-sm-12 room-mobile"
                          v-for="(room, index) in rooms"
                          :key="room.id"
