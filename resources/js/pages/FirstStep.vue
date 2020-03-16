@@ -8,7 +8,7 @@
                 <div class="main__inner">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8 col-md-10">
-                            <select class="main__select" v-model="complex">
+                            <select class="main__select clickable" v-model="complex">
                                 <option :value="null">выбрать ЖК</option>
                                 <option v-for="complex in allComplexes"
                                         :value="complex.id"

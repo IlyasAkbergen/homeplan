@@ -13,8 +13,10 @@
                             <div class="col-xl-3 col-lg-4 col-md-6 col-6 mb-4" v-for="roomType in allRoomTypes">
                                 <div :class="`circle mx-auto ${customRoomTypes
                                         .some((c) => c.id === roomType.id)
-                                            ? 'circle-selected' : ''}`">
-                                    <div class="circle-content clickable"
+                                            ? 'circle-selected ' : ''}`">
+                                    <div :class="`circle-content clickable ${customRoomTypes
+                                        .some((c) => c.id === roomType.id)
+                                            ? 'circle-content-active ' : ''}`"
                                         @click="switchCustomRoomType(roomType)"
                                     >
                                         <i :class="`fas fa-${roomType.icon}`"></i>

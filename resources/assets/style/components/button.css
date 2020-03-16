@@ -77,27 +77,28 @@
     text-decoration: none;
     color: rgb(235, 235, 235);
 }
+.rooms__button__group{
+    justify-content: start;
+}
+.rooms--button-group{
+    margin-bottom: 10px;
+}
 
 @media(max-width: 1199px){
     .room--button{
-        margin-bottom:20px;
+        /* margin-bottom:20px; */
     }
 }
 
 @media(max-width: 767px){
-    .rooms__button__group{
-        justify-content: start;
-    }
+
     .nav__prev--button{
         display: none;
     }
     .nav__next--button{
         justify-content: center;
     }
-    .rooms--button-group{
-        margin-bottom: 20px;
-        /* display: flex; */
-    }
+
     .room--button{
         min-width: 100px;
     }
