@@ -38,7 +38,7 @@
             if (this.countDown > 0){
               this.countDownTimer()
             } else {
-                location.reload();
+                location.replace("https://homeplan.kz/");
               // this.$router.push('/');
 
             }

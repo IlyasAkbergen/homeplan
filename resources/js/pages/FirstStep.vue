@@ -56,7 +56,7 @@
                                     <input type="text"
                                            name="address"
                                            class="form-control main__select"
-                                           placeholder="Введите адресс"
+                                           placeholder="Введите адрес"
                                            v-model="customComplex.address"
                                     >
                                 </div>

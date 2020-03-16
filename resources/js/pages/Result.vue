@@ -184,7 +184,7 @@
             hideModal(){
                 this.$refs['order-created-modal'].hide();
                 this.$router.push('/');
-                location.reload();
+                // location.replace("http://www.w3schools.com");
             }
         },
         computed: {
