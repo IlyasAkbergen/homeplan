@@ -60,11 +60,13 @@
 
                             </div>
                             <div class="result__content--cost" >
-                                <h1>Стоимость дизайн-проекта</h1>
-                                <h2 v-if="orderResult.complex !== null
-                                    && resultIsReady">
-                                        {{ orderResult.complex.name || '' }}
-                                </h2>
+                                <div class="row justify-content-between">
+                                    <h1>Стоимость дизайн-проекта</h1>
+                                    <h2 v-if="orderResult.complex !== null
+                                        && resultIsReady">
+                                            {{ orderResult.complex.name || '' }}
+                                    </h2>
+                                </div>
                                 <div class="row justify-content-between">
                                     <p class="content__cost__right">Разработка 3D визуализации</p>
                                     <p class="content__cost__left">от 20 000 тг.</p>
@@ -85,9 +87,9 @@
                                     <h3>итого:</h3>
                                     <h3>{{ orderResult.price }}тг.</h3>
                                 </div>
-                                <div class="result__content--input" id = "form-submit">
+                                <div class="row result__content--input" id = "form-submit">
                                     <h4>Оформить заказ</h4>
-                                    <form @submit.prevent="submitForm">
+                                    <form @submit.prevent="submitForm" class="col-12 p-0">
                                         <input type="text" placeholder="Имя" v-model="clientname" required>
                                         <input type="text"
                                                placeholder="Телефон"

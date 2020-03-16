@@ -74,6 +74,9 @@
 	text-align: center;
 	width: 100%;
 }
+.circle-content-active{
+	color: black;
+}
 
 .circle-content i{
 	font-size:30px;

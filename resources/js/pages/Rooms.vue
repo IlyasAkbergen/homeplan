@@ -10,8 +10,8 @@
                 <div class="rooms__inner row align-items-center justify-content-between">
                     <BackButton :onClick="backClicked"/>
                     <div class="col-md-8">
-                        <div class="row rooms__button__group">
-                            <div class="col-xl col-lg-3 col-md-4 col-4"
+                        <div class="row rooms__button__group justify-content-center">
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-4 rooms--button-group"
                                  v-for="(roomType, index) in selectedRoomTypes">
                                 <a
                                     href="#"
